@@ -1,0 +1,66 @@
+// Mock profile deck. In a real app this would come from an API.
+// Colors are used to generate a placeholder "photo" for each profile.
+const profiles = [
+  {
+    id: "alex",
+    name: "Alex",
+    location: "Pretoria",
+    distance: "4km",
+    color: "#6D5B7F",
+    bio: "Trail runs on Saturdays, terrible at board games, great at arguing about them anyway. Looking for someone who reads the whole menu before ordering.",
+    hobbies: ["biking", "Food", "Bikes", "Cars"],
+    personality: { introvert: 78, analytical: 55, techSavvy: 30, sporty: 45 },
+  },
+  {
+    id: "maya",
+    name: "Maya",
+    location: "Pretoria",
+    distance: "7km",
+    color: "#C06C86",
+    bio: "Collects houseplants faster than she can keep them alive. Will absolutely beat you at trivia night, will absolutely gloat about it.",
+    hobbies: ["Plants", "Trivia", "Coffee", "Vinyl"],
+    personality: { introvert: 35, analytical: 70, techSavvy: 65, sporty: 20 },
+  },
+  {
+    id: "james",
+    name: "James",
+    location: "Centurion",
+    distance: "12km",
+    color: "#F1737F",
+    bio: "Rebuilds old motorbikes in a garage that is definitely a fire hazard. Excellent at directions, terrible at being on time.",
+    hobbies: ["Motorbikes", "Braai", "Hiking", "Jazz"],
+    personality: { introvert: 50, analytical: 40, techSavvy: 55, sporty: 80 },
+  },
+  {
+    id: "priya",
+    name: "Priya",
+    location: "Pretoria",
+    distance: "3km",
+    color: "#F8B28E",
+    bio: "Runs a small pottery stall on weekends. Talks to her plants, her cat, and occasionally her houseplants' cat. Looking for low drama, high curiosity.",
+    hobbies: ["Pottery", "Cats", "Markets", "Tea"],
+    personality: { introvert: 60, analytical: 45, techSavvy: 20, sporty: 30 },
+  },
+  {
+    id: "kagiso",
+    name: "Kagiso",
+    location: "Midrand",
+    distance: "18km",
+    color: "#325D80",
+    bio: "Spreadsheet enthusiast by day, amateur DJ by night. Will absolutely make you a playlist before a first date. No regrets about that.",
+    hobbies: ["DJing", "Spreadsheets", "Running", "Sneakers"],
+    personality: { introvert: 25, analytical: 85, techSavvy: 90, sporty: 55 },
+  },
+  {
+    id: "thandi",
+    name: "Thandi",
+    location: "Pretoria",
+    distance: "6km",
+    color: "#6D5B7F",
+    bio: "Reads two books a week and remembers none of the plots, only the vibes. Looking for someone who will argue about the ending with her.",
+    hobbies: ["Reading", "Wine", "Museums", "Dogs"],
+    personality: { introvert: 68, analytical: 60, techSavvy: 40, sporty: 15 },
+  },
+];
+
+export default profiles;
