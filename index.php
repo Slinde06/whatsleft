@@ -8,4 +8,3 @@ if (!empty($_SESSION['user_id'])) {
 } else {
     redirect(base_url('frontend/pages/login.php'));
 }
-//  test
