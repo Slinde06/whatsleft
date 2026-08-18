@@ -24,7 +24,7 @@ if (!$match) {
 
 $otherUserId = $match['user1_id'] == $currentUser['id'] ? $match['user2_id'] : $match['user1_id'];
 
-
+// Die ander persoon moet ook vry wees om weer in hierdie match te kom.
 $otherUser = get_user($pdo, $otherUserId);
 if ($otherUser && $otherUser['is_matched']) {
     json_response(['success' => false, 'error' => 'That person is already in a different match, so this can\'t be restored.'], 422);

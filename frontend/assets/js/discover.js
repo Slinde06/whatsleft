@@ -1,4 +1,7 @@
-
+/**
+ * frontend/assets/js/discover.js
+ * Laai een kandidaat op 'n slag en hanteer Like / Dislike / Skip.
+ */
 (function () {
     const base = window.WL.baseUrl;
     let currentCandidateId = null;
@@ -27,7 +30,7 @@
         hobbiesBox.innerHTML = '';
         (c.hobbies || []).forEach(h => {
             const span = document.createElement('span');
-            span.className = 'wl-tag';
+            span.className = 'appletag';
             span.textContent = h;
             hobbiesBox.appendChild(span);
         });
@@ -45,7 +48,7 @@
             .then(r => r.json())
             .then(data => {
                 if (!data.success) {
-                    actionMessage.innerHTML = '<div class="wl-alert-error">' + (data.error || 'Something went wrong.') + '</div>';
+                    actionMessage.innerHTML = '<div class="uhohbox">' + (data.error || 'Something went wrong.') + '</div>';
                     showState('none');
                     return;
                 }
@@ -60,7 +63,7 @@
                 }
             })
             .catch(() => {
-                actionMessage.innerHTML = '<div class="wl-alert-error">Could not reach the server.</div>';
+                actionMessage.innerHTML = '<div class="uhohbox">Could not reach the server.</div>';
                 showState('none');
             });
     }
@@ -77,7 +80,7 @@
             if (data.success && data.matched) {
                 window.location.href = base + 'frontend/pages/match_space.php';
             } else {
-                actionMessage.innerHTML = '<div class="wl-alert-error">' + (data.error || 'Could not like this profile.') + '</div>';
+                actionMessage.innerHTML = '<div class="uhohbox">' + (data.error || 'Could not like this profile.') + '</div>';
             }
         });
     });
@@ -94,12 +97,12 @@
             if (data.success) {
                 loadNext();
             } else {
-                actionMessage.innerHTML = '<div class="wl-alert-error">' + (data.error || 'Could not skip.') + '</div>';
+                actionMessage.innerHTML = '<div class="uhohbox">' + (data.error || 'Could not skip.') + '</div>';
             }
         });
     });
 
-
+    // ---- Dislike vloei (maak die rede modal oop) ----
     const dislikeModalEl = document.getElementById('dislikeModal');
     const dislikeModal = new bootstrap.Modal(dislikeModalEl);
 

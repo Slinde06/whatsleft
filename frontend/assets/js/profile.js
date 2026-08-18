@@ -1,8 +1,11 @@
-
+/**
+ * frontend/assets/js/profile.js
+ * Laat die Edit Profile bladsy werk: hobby tags, AJAX foto oplaai/verwyder, veranderinge stoor.
+ */
 (function () {
     const base = window.WL.baseUrl;
 
-
+    // ---------------- Hobby tags ----------------
     const hobbyInput = document.getElementById('hobby-input');
     const hobbyTags = document.getElementById('hobby-tags');
 
@@ -13,7 +16,7 @@
         if (existing.includes(text.toLowerCase())) return;
 
         const span = document.createElement('span');
-        span.className = 'wl-tag';
+        span.className = 'appletag';
         span.dataset.hobby = text;
         span.innerHTML = text + ' <a href="#" class="remove-hobby text-danger text-decoration-none">&times;</a>';
         hobbyTags.appendChild(span);
@@ -38,6 +41,7 @@
         return Array.from(hobbyTags.querySelectorAll('[data-hobby]')).map(el => el.dataset.hobby);
     }
 
+    // ---------------- Foto oplaai ----------------
     const photoGrid = document.getElementById('photo-grid');
 
     function bindRemoveButtons() {
@@ -71,7 +75,7 @@
             slot = document.createElement('div');
             slot.className = 'col-3';
             slot.id = 'add-photo-slot';
-            slot.innerHTML = '<label for="photo-upload" class="wl-photo-thumb d-flex align-items-center justify-content-center" style="cursor:pointer;border:2px dashed var(--white);background:transparent;">+ ADD</label>';
+            slot.innerHTML = '<label for="photo-upload" class="photothumb d-flex align-items-center justify-content-center" style="cursor:pointer;border:2px dashed var(--white);background:transparent;">+ ADD</label>';
             photoGrid.appendChild(slot);
         }
         if (count >= 6 && slot) {
@@ -94,13 +98,13 @@
                     const wrap = document.createElement('div');
                     wrap.className = 'col-3 photo-thumb-wrap';
                     wrap.dataset.photoId = data.photo_id;
-                    wrap.innerHTML = '<img class="wl-photo-thumb" src="' + data.photo_url + '" alt="Profile photo">' +
+                    wrap.innerHTML = '<img class="photothumb" src="' + data.photo_url + '" alt="Profile photo">' +
                                       '<a href="#" class="remove-photo small text-white d-block text-center">Remove</a>';
                     photoGrid.insertBefore(wrap, document.getElementById('add-photo-slot'));
                     bindRemoveButtons();
                     ensureAddSlot();
 
-
+                    // As dit die eerste foto is, wys dit ook in die primêre foto-blokkie.
                     const primaryImg = document.getElementById('primary-photo-img');
                     if (photoGrid.querySelectorAll('.photo-thumb-wrap').length === 1) {
                         primaryImg.src = data.photo_url;
@@ -114,6 +118,7 @@
 
     bindRemoveButtons();
 
+    // ---------------- Veranderinge stoor ----------------
     document.getElementById('save-changes-btn').addEventListener('click', function () {
         const payload = {
             first_name: document.getElementById('first_name').value,
@@ -141,12 +146,12 @@
         .then(r => r.json())
         .then(data => {
             if (data.success) {
-                msgBox.innerHTML = '<div class="wl-alert-success">Changes saved.</div>';
+                msgBox.innerHTML = '<div class="yaybox">Changes saved.</div>';
                 if (window.WL.welcome) {
                     setTimeout(function () { window.location.href = base + 'frontend/pages/home.php'; }, 900);
                 }
             } else {
-                msgBox.innerHTML = '<div class="wl-alert-error">' + (data.error || 'Could not save changes.') + '</div>';
+                msgBox.innerHTML = '<div class="uhohbox">' + (data.error || 'Could not save changes.') + '</div>';
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });

@@ -1,16 +1,19 @@
-
+/* =========================================================
+   What's Left - style.css
+   Kleure + tipografie reguit van die handelsmerk-stylkaart af.
+   ========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poly:ital@0;1&display=swap');
 
 :root {
-    --navy:        #408032;
-    --mauve:       #6D5B7F;
-    --rose:        #C06C86;
-    --coral:       #F1737F;
-    --peach:       #F8B28E;
-    --cta:         #A32E52;
+    --navy:        #3a6cb3; /* bladsy agtergrond */
+    --mauve:       #6D5B7F; /* foto plekhouers / sekondêre paneele */
+    --rose:        #C06C86; /* middel aksent */
+    --coral:       #F1737F; /* skakels, uitlig kleure */
+    --peach:       #F8B28E; /* reël-blokkies / waarskuwings */
+    --cta:         #A32E52; /* primêre knoppies (donkerder pienk familie) */
     --cta-hover:   #8A2545;
-    --skip-pink:   #E8879A;
+    --skip-pink:   #E8879A; /* sekondêre "Terug"/pienk knoppies */
     --ink:         #20222B;
     --white:       #FFFFFF;
 
@@ -34,7 +37,8 @@ h1, h2, h3, .display {
 a { color: var(--coral); text-decoration: none; }
 a:hover { color: var(--cta); }
 
-.wl-navbar {
+/* ---------- Bo-navbar ---------- */
+.topbar {
     background: var(--white);
     padding: 0.9rem 2.5rem;
     display: flex;
@@ -42,9 +46,12 @@ a:hover { color: var(--cta); }
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    position: relative;
+    z-index: 5;
 }
 
-.wl-brand {
+.logostuff {
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -53,91 +60,106 @@ a:hover { color: var(--cta); }
     color: var(--ink);
 }
 
-.wl-brand img { height: 34px; width: 34px; }
+.logostuff img { height: 34px; width: 34px; }
 
-.wl-nav-links {
+.navstuff {
     display: flex;
     align-items: center;
     gap: 1.75rem;
     font-weight: 500;
 }
 
-.wl-nav-links a { color: var(--ink); }
-.wl-nav-links a.active { color: var(--cta); font-weight: 600; }
+.navstuff a { color: var(--ink); }
+.navstuff a.active { color: var(--cta); font-weight: 600; }
 
-.wl-nav-badge {
+.navbadge {
     color: var(--cta);
     font-weight: 600;
     font-size: 0.85rem;
     letter-spacing: 0.03em;
 }
 
-.wl-profile-icon {
+.george {
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: #e9e9ef;
+    background: var(--cta);
+    color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--ink);
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: var(--font-display);
 }
 
+.logoutbtn {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #8a8494;
+    border: 1px solid #dcd9e2;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+}
+.logoutbtn:hover { color: var(--cta); border-color: var(--cta); }
 
-.wl-page {
+/* ---------- Uitleg helpers ---------- */
+.pagebox {
     padding: 2.5rem;
 }
 
-.wl-panel {
+.bigbox {
     background: var(--mauve);
     border-radius: 10px;
     padding: 1.75rem;
     color: var(--white);
+    box-shadow: 0 4px 18px rgba(0,0,0,.12);
 }
 
-.wl-panel h1, .wl-panel h2, .wl-panel h3 { color: var(--white); }
+.bigbox h1, .bigbox h2, .bigbox h3 { color: var(--white); }
 
-.wl-rules-box {
+.rulesbox {
     background: var(--peach);
     border-radius: 6px;
     padding: 1.25rem 1.5rem;
     color: #5c2a1a;
 }
 
-.wl-rules-box .wl-rules-title {
+.rulesbox .rulestitle {
     color: var(--cta);
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
-.wl-rules-box ul {
+.rulesbox ul {
     margin: 0;
     padding-left: 1.1rem;
 }
 
-
-.btn-wl-primary {
+/* ---------- Knoppies ---------- */
+.mainbutton {
     background: var(--cta);
     border: none;
     color: var(--white);
     padding: 0.65rem 1.75rem;
     border-radius: 6px;
     font-weight: 600;
-    transition: background 0.15s ease;
+    transition: background 0.15s ease, transform 0.1s ease;
 }
-.btn-wl-primary:hover { background: var(--cta-hover); color: var(--white); }
+.mainbutton:hover { background: var(--cta-hover); color: var(--white); transform: translateY(-1px); }
 
-.btn-wl-secondary {
+.pinkbutton {
     background: var(--skip-pink);
     border: none;
     color: var(--white);
     padding: 0.65rem 1.75rem;
     border-radius: 6px;
     font-weight: 600;
+    transition: background 0.15s ease, transform 0.1s ease;
 }
-.btn-wl-secondary:hover { background: #d9748a; color: var(--white); }
+.pinkbutton:hover { background: #d9748a; color: var(--white); transform: translateY(-1px); }
 
-.btn-wl-outline {
+.outlinebutton {
     background: transparent;
     border: 2px solid var(--white);
     color: var(--white);
@@ -145,33 +167,60 @@ a:hover { color: var(--cta); }
     border-radius: 6px;
     font-weight: 600;
 }
-.btn-wl-outline:hover { background: var(--white); color: var(--navy); }
+.outlinebutton:hover { background: var(--white); color: var(--navy); }
 
+/* vir die klein "demo" knoppies wat op ligte paneele sit, waar die wit
+   outline knoppie nie goed sigbaar is nie */
+.outlinebutton2 {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,.6);
+    color: var(--white);
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.82rem;
+}
+.outlinebutton2:hover { background: rgba(255,255,255,.15); color: var(--white); }
 
-.wl-page label {
+/* ---------- Vorms ---------- */
+.pagebox label {
     color: #d9d3e8;
     font-size: 0.9rem;
     margin-bottom: 0.25rem;
 }
 
-.wl-panel label { color: #efe9f5; }
+.bigbox label { color: #efe9f5; }
 
-.form-control.wl-input {
+.form-control.inputbox {
     border-radius: 6px;
-    border: none;
+    border: 1px solid transparent;
     padding: 0.65rem 0.9rem;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+.form-control.inputbox:focus {
+    border-color: var(--cta);
+    box-shadow: 0 0 0 3px rgba(163,46,82,.15);
 }
 
+/* die chat-typkassie moet duidelik lyk asof jy daarin kan tik, so gee dit
+   'n regte grens (nie net platte wit soos die ander inputs nie). */
+#chat-input.inputbox {
+    border: 1px solid #cfc9db;
+}
+#chat-input.inputbox:focus {
+    border-color: var(--cta);
+}
 
-.wl-auth-wrap {
+/* ---------- Auth bladsye (login / signup) ---------- */
+.authwrap {
     min-height: calc(100vh - 70px);
     display: flex;
 }
-.wl-auth-side {
+.authside {
     flex: 1;
-    background:
-        linear-gradient(180deg, rgba(32, 20, 30, .55), rgba(32, 20, 30, .7)),
-        url('../images/good-faces-zTjVhEKkhRc-unsplash.jpg') center / cover no-repeat;
+    background: var(--mauve);
+    background-size: cover;
+    background-position: center;
     color: var(--white);
     display: flex;
     flex-direction: column;
@@ -180,12 +229,12 @@ a:hover { color: var(--cta); }
     position: relative;
     overflow: hidden;
 }
-.wl-auth-side blockquote {
+.authside blockquote {
     font-family: var(--font-display);
     font-size: 1.5rem;
     max-width: 30rem;
 }
-.wl-auth-form {
+.authform {
     flex: 1;
     background: var(--navy);
     display: flex;
@@ -193,43 +242,87 @@ a:hover { color: var(--cta); }
     justify-content: center;
     padding: 3rem;
 }
-.wl-auth-card { max-width: 32rem; width: 100%; }
-.wl-auth-eyebrow { color: var(--coral); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; }
-.wl-auth-card h1 { color: var(--ink); }
-.wl-auth-card .subtitle { color: #d9d3e8; margin-bottom: 1.5rem; }
+.authcard { max-width: 32rem; width: 100%; }
+.tinytext { color: var(--coral); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; }
+/* was color: var(--ink) wat donker navy teks op 'n donker navy kaart agtergrond gee - moeilik om te lees.
+   verander na wit sodat die opskrif regtig uitstaan. */
+.authcard h1 { color: var(--white); }
+.authcard .subtitle { color: #d9d3e8; margin-bottom: 1.5rem; }
 
-
-.wl-auth-wrap .wl-auth-card h1 { color: var(--white); }
-.wl-auth-wrap .wl-auth-card label { color: var(--white); }
-
-
-.wl-home-flex {
-    display: flex;
-    align-items: stretch;
-    gap: 1.5rem;
-}
-.wl-home-side-img {
-    flex: 0 0 220px;
-    border-radius: 10px;
+/* ---------- Tuisblad hero kant-prente ---------- */
+.herosection {
+    background:
+        linear-gradient(180deg, rgba(50,93,128,.75), rgba(50,93,128,.96)),
+        url('../images/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg');
     background-size: cover;
     background-position: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
-.wl-home-content {
-    flex: 1;
-    min-width: 0;
+.sidepic {
+    min-height: 320px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--mauve);
+    box-shadow: 0 8px 24px rgba(0,0,0,.25);
 }
-@media (max-width: 991px) {
-    .wl-home-flex { flex-direction: column; }
-    .wl-home-side-img { display: none; }
+.sidepic img {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+    display: block;
 }
 
+.featurecard {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px;
+    padding: 1.75rem 1.25rem;
+    height: 100%;
+}
+.featureicon {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--peach);
+    margin-bottom: .5rem;
+}
 
-.wl-photo-frame {
+.stepcard {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: rgba(255,255,255,.04);
+    border-radius: 10px;
+    padding: 1.25rem;
+}
+.stepnum {
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--cta);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-family: var(--font-display);
+}
+
+.ctaband {
+    background: linear-gradient(180deg, #14151b, #0b0c10);
+    padding: 3.5rem 1.5rem;
+    text-align: center;
+}
+
+/* ---------- Discover kaart ---------- */
+.photoframe {
     background: var(--mauve);
     border-radius: 10px;
     padding: 1.25rem;
 }
-.wl-photo-frame .photo-box {
+.photoframe .photo-box {
     background: var(--white);
     border-radius: 6px;
     width: 100%;
@@ -239,52 +332,84 @@ a:hover { color: var(--cta); }
     justify-content: center;
     overflow: hidden;
 }
-.wl-photo-frame .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+.photoframe .photo-box img { width: 100%; height: 100%; object-fit: cover; }
 
-.wl-slider-card {
+.sliderbox {
     background: var(--white);
     border-radius: 10px;
     padding: 1.75rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    color: #000;
+}
+/* die kaart se agtergrond is wit, maar hy sit binne 'n bigbox wat wit teks
+   opdwing - dit maak die opskrifte en teks onsigbaar. maak dit swart sodat
+   dit maklik lees. */
+.sliderbox h1, .sliderbox h2, .sliderbox h3,
+.sliderbox h4, .sliderbox h5, .sliderbox h6,
+.sliderbox p, .sliderbox label {
+    color: #000;
 }
 
-.wl-slider { margin-bottom: 1.1rem; }
-.wl-slider .labels { display: flex; justify-content: space-between; font-weight: 600; font-size: 0.85rem; }
-.wl-slider input[type="range"] { width: 100%; accent-color: var(--ink); }
+/* gebruik binne die wit sliderbox blokkies (match space, discover kandidaat) */
+.slidertext {
+    color: #000;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+/* gebruik wanneer die intro teks direk op die mauve bigbox agtergrond sit
+   (edit profile bladsy) - moet lig wees, nie donker nie, om leesbaar te bly */
+.slidertext2 {
+    color: #e9e4f2;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+}
+.slider1 { margin-bottom: 1.1rem; }
+.slider1 .labels { display: flex; justify-content: space-between; font-weight: 600; font-size: 0.85rem; color: #000; }
+.slider1 input[type="range"] { width: 100%; accent-color: var(--ink); }
 
-
-.wl-leaderboard { background: var(--navy); }
-.wl-leaderboard table { margin-bottom: 0; }
-.wl-leaderboard thead th {
+/* ---------- Public reasons leaderboard ---------- */
+.leaderboardpic {
+    background-size: cover;
+    background-position: center;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    color: var(--white);
+}
+.leaderboardpic h1 { color: var(--peach); margin-bottom: 0.5rem; }
+.leaderboardpic p { color: #e9e4f2; max-width: 40rem; margin: 0 auto; }
+.leaderboard1 { background: var(--navy); }
+.leaderboard1 table { margin-bottom: 0; }
+.leaderboard1 thead th {
     background: var(--peach);
     color: #5c2a1a;
     border: none;
     white-space: nowrap;
 }
-.wl-leaderboard tbody tr:nth-child(odd) { background: var(--mauve); color: var(--white); }
-.wl-leaderboard tbody tr:nth-child(even) { background: var(--peach); color: #5c2a1a; }
-.wl-leaderboard td { vertical-align: middle; }
-.wl-leaderboard .avatar { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; background: var(--white); }
+.leaderboard1 tbody tr:nth-child(odd) { background: var(--mauve); color: var(--white); }
+.leaderboard1 tbody tr:nth-child(even) { background: var(--peach); color: #5c2a1a; }
+.leaderboard1 td { vertical-align: middle; }
+.leaderboard1 .avatar { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; background: var(--white); }
 
-
-.wl-chat-window {
+/* ---------- Chat ---------- */
+.chatbox {
     background: var(--white);
     border-radius: 10px;
     height: 340px;
     overflow-y: auto;
     padding: 1rem;
 }
-.wl-chat-bubble {
+.bubble1 {
     max-width: 75%;
     padding: 0.5rem 0.85rem;
     border-radius: 12px;
     margin-bottom: 0.5rem;
     font-size: 0.92rem;
 }
-.wl-chat-bubble.mine { background: var(--peach); margin-left: auto; }
-.wl-chat-bubble.theirs { background: #e9e6f0; margin-right: auto; }
+.bubble1.mine { background: var(--peach); margin-left: auto; }
+.bubble1.theirs { background: #e9e6f0; margin-right: auto; }
 
-
-.wl-tag {
+/* ---------- Ander goedjies ---------- */
+.appletag {
     display: inline-block;
     border: 1px solid var(--ink);
     border-radius: 6px;
@@ -295,7 +420,7 @@ a:hover { color: var(--cta); }
     color: var(--ink);
 }
 
-.wl-photo-thumb {
+.photothumb {
     width: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 6px;
@@ -303,31 +428,84 @@ a:hover { color: var(--cta); }
     object-fit: cover;
 }
 
-.wl-alert-error {
-    background: #fbeaea;
-    border: 1px solid #e2a5a5;
-    color: #7a1f1f;
+/* die "foutjie" en "gestoor" boksies - gemaak om by die res van die werf se
+   kleure te pas i.p.v. die generiese rooi/groen bootstrap kleure. gee dit
+   ook 'n effense skeef/handgemaakte voorkoms, soos 'n sticky note wat vinnig
+   opgeplak is - nie te perfek nie. */
+.uhohbox {
+    background: #fbe4dc;
+    border: 2px dashed var(--cta);
+    border-left: 6px solid var(--cta);
+    color: #6e1230;
     padding: 0.75rem 1rem;
-    border-radius: 6px;
+    border-radius: 4px;
     margin-bottom: 1rem;
+    box-shadow: 3px 4px 0 rgba(0,0,0,.12);
+    transform: rotate(-0.3deg);
+    font-weight: 600;
 }
-.wl-alert-success {
-    background: #e9f7ee;
-    border: 1px solid #a9d9bb;
-    color: #1f5c33;
+.uhohbox::before {
+    content: "Oops - ";
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: .03em;
+}
+.yaybox {
+    background: #eef3df;
+    border: 2px dashed #5c7a3a;
+    border-left: 6px solid #5c7a3a;
+    color: #33471f;
     padding: 0.75rem 1rem;
-    border-radius: 6px;
+    border-radius: 4px;
     margin-bottom: 1rem;
+    box-shadow: 3px 4px 0 rgba(0,0,0,.12);
+    transform: rotate(0.3deg);
+    font-weight: 600;
+}
+.yaybox::before {
+    content: "Nice - ";
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: .03em;
 }
 
-footer.wl-footer {
-    text-align: center;
-    color: #d9d3e8;
-    padding: 2rem 0 1rem;
+footer.bottomstuff {
+    background: #0f1015;
+    color: #b9b3c6;
+    padding: 2.5rem 1.5rem 1.5rem;
+    margin-top: 2rem;
     font-size: 0.85rem;
 }
+.bottomstuffinner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+}
+.bottomlogo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--white);
+}
+.bottomlogo img { height: 24px; width: 24px; opacity: 0.9; }
+.bottomlinks { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.bottomlinks a { color: #cfc9db; }
+.bottomlinks a:hover { color: var(--coral); }
+.bottomnote {
+    flex-basis: 100%;
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding-top: 1rem;
+    color: #8d879c;
+}
+.bottomcopy { color: #6f6a80; font-size: 0.78rem; }
 
 @media (max-width: 767px) {
-    .wl-auth-wrap { flex-direction: column; }
-    .wl-page { padding: 1.25rem; }
+    .authwrap { flex-direction: column; }
+    .pagebox { padding: 1.25rem; }
 }

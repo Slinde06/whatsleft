@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $userId = (int) $currentUser['id'];
 
-
+// Hoeveel foto's het hierdie gebruiker al?
 $countStmt = $pdo->prepare('SELECT COUNT(*) AS c FROM user_photos WHERE user_id = ?');
 $countStmt->execute([$userId]);
 $existingCount = (int) $countStmt->fetch()['c'];

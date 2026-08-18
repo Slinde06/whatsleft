@@ -2,8 +2,14 @@
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../../includes/functions.php';
 
-if (!empty($_SESSION['user_id'])) {
-    redirect(base_url('frontend/pages/home.php'));
+// Selfde rede as login.php - as iemand al ingeteken is en hier land om 'n
+// nuwe toets-rekening te maak, teken die ou sessie uit eerder as om hulle
+// terug na home toe te stoot.
+// if (!empty($_SESSION['user_id'])) {
+//     redirect(base_url('frontend/pages/home.php'));
+// }
+if (!empty($_SESSION['user_id']) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
+    unset($_SESSION['user_id']);
 }
 
 $errors = [];
@@ -60,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
         $newUserId = (int) $pdo->lastInsertId();
 
-        // Default personality row so sliders have something to show later.
+        // Verstek personality-ry sodat die sliders later iets het om te wys.
         $pdo->prepare('INSERT INTO user_personality (user_id) VALUES (?)')->execute([$newUserId]);
 
         $_SESSION['user_id'] = $newUserId;
@@ -79,8 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-<nav class="wl-navbar">
-    <a href="<?= e(base_url('frontend/pages/login.php')) ?>" class="wl-brand">
+<nav class="topbar">
+    <a href="<?= e(base_url('frontend/pages/login.php')) ?>" class="logostuff">
         <img src="<?= e(base_url('frontend/assets/images/logo.svg')) ?>" alt="What's Left logo">
         What&rsquo;s Left
     </a>
@@ -89,39 +95,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </nav>
 
-<div class="wl-page" style="background: var(--navy); min-height: calc(100vh - 70px);">
-    <div class="wl-auth-card mx-auto" style="max-width: 42rem;">
+<!-- Signup was voorheen net 'n los kaart in die middel op 'n plein navy
+     agtergrond. Het dit dieselfde gesplitste layout as die login bladsy
+     gegee (prent aan die kant + vorm aan die kant) sodat die twee bladsye
+     soos deel van dieselfde werf voel. Ou markup is hieronder gelos, as
+     kommentaar, ingeval ons die plein weergawe terug wil hê. -->
+<!--
+<div class="pagebox" style="background: var(--navy); min-height: calc(100vh - 70px);">
+    <div class="authcard mx-auto" style="max-width: 42rem;">
+        ...
+    </div>
+</div>
+-->
+
+<div class="authwrap">
+    <div class="authside" style="background-image: linear-gradient(180deg, rgba(50,93,128,.55), rgba(50,93,128,.88)), url('<?= e(base_url('frontend/assets/images/brooke-cagle-oTweoxMKdkA-unsplash.jpg')) ?>');">
+        <blockquote>
+            &ldquo;Every choice you make here is permanent and public. Read the rules before you join.&rdquo;
+        </blockquote>
+        <p>What&rsquo;s Left</p>
+    </div>
+
+    <div class="authform">
+    <div class="authcard" style="max-width: 42rem;">
         <div class="text-center">
-            <div class="wl-auth-eyebrow">Join What&rsquo;s Left</div>
-            <h1 style="color:var(--white)">Create your account</h1>
+            <div class="tinytext">Join What&rsquo;s Left</div>
+            <h1>Create your account</h1>
             <p class="subtitle">Read carefully.</p>
         </div>
 
         <?php foreach ($errors as $err): ?>
-            <div class="wl-alert-error"><?= e($err) ?></div>
+            <div class="uhohbox"><?= e($err) ?></div>
         <?php endforeach; ?>
 
         <form method="POST" action="" novalidate>
             <div class="row g-3">
                 <div class="col-md-6">
                     <label for="first_name">First Name:</label>
-                    <input type="text" class="form-control wl-input" id="first_name" name="first_name" placeholder="Sam" value="<?= e($old['first_name']) ?>" required>
+                    <input type="text" class="form-control inputbox" id="first_name" name="first_name" placeholder="Sam" value="<?= e($old['first_name']) ?>" required>
                 </div>
                 <div class="col-md-6">
                     <label for="last_name">Last Name:</label>
-                    <input type="text" class="form-control wl-input" id="last_name" name="last_name" placeholder="Williams" value="<?= e($old['last_name']) ?>" required>
+                    <input type="text" class="form-control inputbox" id="last_name" name="last_name" placeholder="Williams" value="<?= e($old['last_name']) ?>" required>
                 </div>
                 <div class="col-12">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control wl-input" id="email" name="email" placeholder="exsample@gmail.com" value="<?= e($old['email']) ?>" required>
+                    <input type="email" class="form-control inputbox" id="email" name="email" placeholder="exsample@gmail.com" value="<?= e($old['email']) ?>" required>
                 </div>
                 <div class="col-md-6">
                     <label for="dob">Date of birth:</label>
-                    <input type="date" class="form-control wl-input" id="dob" name="dob" value="<?= e($old['dob']) ?>" required>
+                    <input type="date" class="form-control inputbox" id="dob" name="dob" value="<?= e($old['dob']) ?>" required>
                 </div>
                 <div class="col-md-6">
                     <label for="looking_for">Looking for:</label>
-                    <select class="form-control wl-input" id="looking_for" name="looking_for" required>
+                    <select class="form-control inputbox" id="looking_for" name="looking_for" required>
                         <option value="" disabled <?= $old['looking_for'] === '' ? 'selected' : '' ?>>Select&hellip;</option>
                         <option value="Male" <?= $old['looking_for'] === 'Male' ? 'selected' : '' ?>>Male</option>
                         <option value="Female" <?= $old['looking_for'] === 'Female' ? 'selected' : '' ?>>Female</option>
@@ -130,21 +157,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="col-md-6">
                     <label for="password">Password:</label>
-                    <input type="password" class="form-control wl-input" id="password" name="password" placeholder="At least 8 characters" required>
+                    <input type="password" class="form-control inputbox" id="password" name="password" placeholder="At least 8 characters" required>
                 </div>
                 <div class="col-md-6">
                     <label for="confirm_password">Confirm Password:</label>
-                    <input type="password" class="form-control wl-input" id="confirm_password" name="confirm_password" placeholder="Repeat password" required>
+                    <input type="password" class="form-control inputbox" id="confirm_password" name="confirm_password" placeholder="Repeat password" required>
                 </div>
             </div>
 
-            <div class="wl-rules-box mt-4">
-                <div class="wl-rules-title">BEFORE YOU JOIN &mdash; THE VERDICT POLICY</div>
+            <div class="rulesbox mt-4">
+                <div class="rulestitle">BEFORE YOU JOIN - THE VERDICT POLICY</div>
                 <ul>
                     <li>You may skip exactly one profile, ever.</li>
-                    <li>You get exactly one undo, ever &mdash; spend it wisely.</li>
+                    <li>You get exactly one undo, ever - spend it wisely.</li>
                     <li>Passing on someone requires a public, detailed reason.</li>
-                    <li>Matching moves your account to a new shared space &mdash; you can&rsquo;t browse again unless it ends.</li>
+                    <li>Matching moves your account to a new shared space - you can&rsquo;t browse again unless it ends.</li>
                     <li>Nothing you do here can ever be deleted.</li>
                 </ul>
                 <div class="form-check mt-3">
@@ -155,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-wl-primary w-100 mt-4">Create Account</button>
+            <button type="submit" class="btn mainbutton w-100 mt-4">Create Account</button>
             <div class="text-center my-3 subtitle">OR</div>
             <p class="text-center subtitle">
                 Already have an account?
@@ -163,7 +190,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </p>
         </form>
     </div>
+    </div>
 </div>
+
+<?php require __DIR__ . '/../../includes/footer.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

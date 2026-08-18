@@ -23,6 +23,7 @@ if ($target['is_matched']) {
     json_response(['success' => false, 'error' => 'That person just matched with someone else.'], 409);
 }
 
+// Al klaar op hierdie persoon geswipe? Moenie dubbel-swipe toelaat nie.
 $dupe = $pdo->prepare('SELECT id FROM swipes WHERE swiper_id = ? AND target_id = ?');
 $dupe->execute([$currentUser['id'], $targetId]);
 if ($dupe->fetch()) {

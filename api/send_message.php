@@ -20,7 +20,7 @@ if (strlen($message) > 2000) {
 
 $matchId = (int) $currentUser['current_match_id'];
 
-
+// Maak seker hierdie match is regtig aktief en behoort aan die huidige gebruiker.
 $check = $pdo->prepare("SELECT id FROM matches WHERE id = ? AND status = 'active' AND (user1_id = ? OR user2_id = ?)");
 $check->execute([$matchId, $currentUser['id'], $currentUser['id']]);
 if (!$check->fetch()) {

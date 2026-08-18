@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../includes/auth.php';
 
 $isMatched = !empty($currentUser['is_matched']) && !empty($currentUser['current_match_id']);
 
-// Can this user undo their most recent ended match?
+// Kan hierdie gebruiker hulle mees onlangse geëindigde match ongedaan maak?
 $canUndo = false;
 $undoMatch = null;
 if (!$currentUser['undo_used'] && !$isMatched) {
@@ -33,80 +33,121 @@ if (!$currentUser['undo_used'] && !$isMatched) {
 
 <?php require __DIR__ . '/../../includes/nav.php'; ?>
 
-<div class="wl-page">
-    <div class="wl-home-flex">
-        <div class="wl-home-side-img" style="background-image:url('<?= e(base_url('frontend/assets/images/evan-tang-IIxQMoT2F7A-unsplash.jpg')) ?>');"></div>
-
-        <div class="wl-home-content">
-
-            <?php if ($canUndo): ?>
-                <div class="wl-panel mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
-                    <div>
-                        <strong>You still have one undo left.</strong>
-                        <div style="font-size:.9rem;">Your last match with <?= e($undoMatch['other_first_name']) ?> ended &mdash; you could restore it. This can only be done once, ever.</div>
-                    </div>
-                    <button class="btn btn-wl-outline" id="undo-btn">Undo last unmatch</button>
-                </div>
-                <div id="undo-message"></div>
-            <?php endif; ?>
-
-            <div class="text-center mb-5">
-                <div class="wl-auth-eyebrow">A dating site with a memory</div>
-                <h1 style="color:var(--peach); font-size:2.4rem;">The right match <span style="color:var(--white)">changes everything,</span></h1>
-                <p style="color:#d9d3e8;">Every choice you make here is permanent and public. No ghosting, no deleting, no do-overs &mdash; just one honest shot at the right match.</p>
+<?php if ($canUndo): ?>
+    <div class="pagebox pb-0">
+        <div class="bigbox mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div>
+                <strong>You still have one undo left.</strong>
+                <div style="font-size:.9rem;">Your last match with <?= e($undoMatch['other_first_name']) ?> ended - you could restore it. This can only be done once, ever.</div>
             </div>
-
-            <div class="row g-4 text-center mb-5" style="color:#e9e4f2;">
-                <div class="col-md-4">
-                    <h3 class="h5" style="color:var(--white)">One match changes your whole site</h3>
-                    <p style="font-size:.92rem;">The moment you match, your entire experience moves to a new, private space built for the two of you. There&rsquo;s no going back to browsing.</p>
-                </div>
-                <div class="col-md-4">
-                    <h3 class="h5" style="color:var(--white)">One undo. Ever.</h3>
-                    <p style="font-size:.92rem;">Across your entire time on What&rsquo;s Left, you get exactly one undo. Spend it carefully &mdash; it doesn&rsquo;t come back.</p>
-                </div>
-                <div class="col-md-4">
-                    <h3 class="h5" style="color:var(--white)">Nothing is ever deleted</h3>
-                    <p style="font-size:.92rem;">Every match, unmatch, and reason you give stays on the record &mdash; visible to others &mdash; for as long as you&rsquo;re a member.</p>
-                </div>
-            </div>
-
-            <div class="wl-auth-eyebrow text-center">How it works</div>
-            <h2 class="text-center mb-4" style="color:var(--white)">Four steps. No undo.</h2>
-            <div class="row g-4 mb-5" style="color:#e9e4f2;">
-                <div class="col-md-6">
-                    <h3 class="h6" style="color:var(--white)">Build your profile</h3>
-                    <p style="font-size:.9rem;">Sign up and tell the truth. Your profile is the only pitch you get.</p>
-                </div>
-                <div class="col-md-6">
-                    <h3 class="h6" style="color:var(--white)">Meet one person at a time</h3>
-                    <p style="font-size:.9rem;">You&rsquo;re shown one profile at a time. You can move to the next one, but never back.</p>
-                </div>
-                <div class="col-md-6">
-                    <h3 class="h6" style="color:var(--white)">Decide</h3>
-                    <p style="font-size:.9rem;">Pass and explain why in public, or match and mean it.</p>
-                </div>
-                <div class="col-md-6">
-                    <h3 class="h6" style="color:var(--white)">Live in the new space</h3>
-                    <p style="font-size:.9rem;">Matching transforms your account into a shared space with them.</p>
-                </div>
-            </div>
-
+            <button class="btn outlinebutton" id="undo-btn">Undo last unmatch</button>
         </div>
+        <div id="undo-message"></div>
+    </div>
+<?php endif; ?>
 
-        <div class="wl-home-side-img" style="background-image:url('<?= e(base_url('frontend/assets/images/yianni-mathioudakis-jKaznAY9iAo-unsplash.jpg')) ?>');"></div>
+<!-- Die hero het vroeer net op die plein navy agtergrond gesit - het nou 'n
+     regte prent-agtergrond met 'n gradient bo-oor gegee sodat dit soos 'n
+     regte landing bladsy lyk, nie 'n mock-up nie. -->
+<div class="herosection">
+    <div class="pagebox">
+        <div class="row align-items-center g-4 mb-5">
+            <div class="col-lg-2 d-none d-lg-block">
+                <div class="sidepic">
+                    <img src="<?= e(base_url('frontend/assets/images/brooke-cagle-oTweoxMKdkA-unsplash.jpg')) ?>" alt="What's Left member">
+                </div>
+            </div>
+            <div class="col-lg-8 text-center">
+                <div class="tinytext">A dating site with a memory</div>
+                <h1 style="color:var(--peach); font-size:2.6rem;">The right match <span style="color:var(--white)">changes everything,</span></h1>
+                <p style="color:#d9d3e8; font-size:1.05rem;">Every choice you make here is permanent and public. No ghosting, no deleting, no do-overs - just one honest shot at the right match.</p>
+            </div>
+            <div class="col-lg-2 d-none d-lg-block">
+                <div class="sidepic">
+                    <img src="<?= e(base_url('frontend/assets/images/toa-heftiba-O3ymvT7Wf9U-unsplash.jpg')) ?>" alt="What's Left member">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div style="background:#0f1015; padding: 3.5rem 1.5rem; text-align:center;">
+<div class="pagebox pt-5">
+
+    <div class="row g-4 text-center mb-5">
+        <div class="col-md-4">
+            <div class="featurecard">
+                <div class="featureicon">01</div>
+                <h3 class="h5" style="color:var(--white)">One match changes your whole site</h3>
+                <p style="font-size:.92rem; color:#e9e4f2;">The moment you match, your entire experience moves to a new, private space built for the two of you. There&rsquo;s no going back to browsing.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="featurecard">
+                <div class="featureicon">02</div>
+                <h3 class="h5" style="color:var(--white)">One undo. Ever.</h3>
+                <p style="font-size:.92rem; color:#e9e4f2;">Across your entire time on What&rsquo;s Left, you get exactly one undo. Spend it carefully - it doesn&rsquo;t come back.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="featurecard">
+                <div class="featureicon">03</div>
+                <h3 class="h5" style="color:var(--white)">Nothing is ever deleted</h3>
+                <p style="font-size:.92rem; color:#e9e4f2;">Every match, unmatch, and reason you give stays on the record - visible to others - for as long as you&rsquo;re a member.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tinytext text-center">How it works</div>
+    <h2 class="text-center mb-4" style="color:var(--white)">Four steps. No undo.</h2>
+    <div class="row g-4 mb-5" style="color:#e9e4f2;">
+        <div class="col-md-6">
+            <div class="stepcard">
+                <span class="stepnum">1</span>
+                <div>
+                    <h3 class="h6 mb-1" style="color:var(--white)">Build your profile</h3>
+                    <p style="font-size:.9rem; margin:0;">Sign up and tell the truth. Your profile is the only pitch you get.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="stepcard">
+                <span class="stepnum">2</span>
+                <div>
+                    <h3 class="h6 mb-1" style="color:var(--white)">Meet one person at a time</h3>
+                    <p style="font-size:.9rem; margin:0;">You&rsquo;re shown one profile at a time. You can move to the next one, but never back.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="stepcard">
+                <span class="stepnum">3</span>
+                <div>
+                    <h3 class="h6 mb-1" style="color:var(--white)">Decide</h3>
+                    <p style="font-size:.9rem; margin:0;">Pass and explain why in public, or match and mean it.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="stepcard">
+                <span class="stepnum">4</span>
+                <div>
+                    <h3 class="h6 mb-1" style="color:var(--white)">Live in the new space</h3>
+                    <p style="font-size:.9rem; margin:0;">Matching transforms your account into a shared space with them.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ctaband">
     <?php if ($isMatched): ?>
         <h2 style="color:var(--white)">You&rsquo;re in a match.</h2>
         <p style="color:#c9c4d4;">Head into your shared space.</p>
-        <a href="<?= e(base_url('frontend/pages/match_space.php')) ?>" class="btn btn-wl-primary btn-lg">Go to Match</a>
+        <a href="<?= e(base_url('frontend/pages/match_space.php')) ?>" class="btn mainbutton btn-lg">Go to Match</a>
     <?php else: ?>
         <h2 style="color:var(--white)">Ready to make a decision that matters?</h2>
         <p style="color:#c9c4d4;">Go discover what&rsquo;s left.</p>
-        <a href="<?= e(base_url('frontend/pages/discover.php')) ?>" class="btn btn-wl-primary btn-lg">Discover</a>
+        <a href="<?= e(base_url('frontend/pages/discover.php')) ?>" class="btn mainbutton btn-lg">Discover</a>
     <?php endif; ?>
 </div>
 
@@ -124,7 +165,7 @@ if (!$currentUser['undo_used'] && !$isMatched) {
                 if (data.success) {
                     window.location.href = <?= json_encode(base_url('frontend/pages/match_space.php')) ?>;
                 } else {
-                    box.innerHTML = '<div class="wl-alert-error">' + (data.error || 'Could not undo.') + '</div>';
+                    box.innerHTML = '<div class="uhohbox">' + (data.error || 'Could not undo.') + '</div>';
                 }
             });
     });

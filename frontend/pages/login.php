@@ -2,9 +2,15 @@
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../../includes/functions.php';
 
-// Already logged in? Skip straight to home.
-if (!empty($_SESSION['user_id'])) {
-    redirect(base_url('frontend/pages/home.php'));
+// Het gebruik om reguit na home te gaan as jy al ingeteken was - maar dit was
+// lastig om te demo, want jy moes eers die uitteken-skakel kry voor jy van
+// rekening kon verwissel. Nou wanneer jy op die login bladsy land, teken dit
+// jou outomaties uit enige rekening en wys die vorm weer.
+// if (!empty($_SESSION['user_id'])) {
+//     redirect(base_url('frontend/pages/home.php'));
+// }
+if (!empty($_SESSION['user_id']) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
+    unset($_SESSION['user_id']);
 }
 
 $errors = [];
@@ -40,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-<nav class="wl-navbar">
-    <a href="<?= e(base_url('frontend/pages/login.php')) ?>" class="wl-brand">
+<nav class="topbar">
+    <a href="<?= e(base_url('frontend/pages/login.php')) ?>" class="logostuff">
         <img src="<?= e(base_url('frontend/assets/images/logo.svg')) ?>" alt="What's Left logo">
         What&rsquo;s Left
     </a>
@@ -50,34 +56,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </nav>
 
-<div class="wl-auth-wrap">
-    <div class="wl-auth-side">
+<div class="authwrap">
+    <div class="authside" style="background-image: linear-gradient(180deg, rgba(50,93,128,.55), rgba(50,93,128,.85)), url('<?= e(base_url('frontend/assets/images/priscilla-du-preez-g86airJZ4Gs-unsplash.jpg')) ?>');">
         <blockquote>
             &ldquo;You get one undo, ever. Log in and remember what that means.&rdquo;
         </blockquote>
-        <p>&mdash; What&rsquo;s Left</p>
+        <p>What&rsquo;s Left</p>
     </div>
 
-    <div class="wl-auth-form">
-        <div class="wl-auth-card">
-            <div class="wl-auth-eyebrow">Welcome back</div>
+    <div class="authform">
+        <div class="authcard">
+            <div class="tinytext">Welcome back</div>
             <h1>Log in</h1>
             <p class="subtitle">Your record is exactly as you left it.</p>
 
             <?php foreach ($errors as $err): ?>
-                <div class="wl-alert-error"><?= e($err) ?></div>
+                <div class="uhohbox"><?= e($err) ?></div>
             <?php endforeach; ?>
 
             <form method="POST" action="">
                 <div class="mb-3">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control wl-input" id="email" name="email" placeholder="exsample@gmail.com" required>
+                    <input type="email" class="form-control inputbox" id="email" name="email" placeholder="exsample@gmail.com" required>
                 </div>
                 <div class="mb-4">
                     <label for="password">Password:</label>
-                    <input type="password" class="form-control wl-input" id="password" name="password" placeholder="Your password" required>
+                    <input type="password" class="form-control inputbox" id="password" name="password" placeholder="Your password" required>
                 </div>
-                <button type="submit" class="btn btn-wl-primary w-100">Log in</button>
+                <button type="submit" class="btn mainbutton w-100">Log in</button>
                 <div class="text-center my-3 subtitle">OR</div>
                 <p class="text-center subtitle mb-0">
                     Don&rsquo;t have an account?
@@ -87,6 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 </div>
+
+<?php require __DIR__ . '/../../includes/footer.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

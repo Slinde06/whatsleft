@@ -1,16 +1,21 @@
 <?php
-
+/**
+ * includes/nav.php
+ * Gedeelde bo-navbar vir ingetekende bladsye.
+ * Verwag $currentUser (array) en opsioneel $activePage (string) om deur die
+ * bladsy wat dit insluit gestel te word voordat hierdie lêer gerequire word.
+ */
 $activePage = $activePage ?? '';
 $isMatched  = !empty($currentUser['is_matched']) && !empty($currentUser['current_match_id']);
 ?>
-<nav class="wl-navbar">
-    <a href="<?= e(base_url('frontend/pages/home.php')) ?>" class="wl-brand">
+<nav class="topbar">
+    <a href="<?= e(base_url('frontend/pages/home.php')) ?>" class="logostuff">
         <img src="<?= e(base_url('frontend/assets/images/logo.svg')) ?>" alt="What's Left logo">
         What&rsquo;s Left
     </a>
 
-    <div class="wl-nav-links">
-        <a href="<?= e(base_url('frontend/pages/home.php')) ?>" class="<?= $activePage === 'home' ? 'active' : '' ?>">Home</a>
+    <div class="navstuff">
+        <a href="<?= e(base_url('frontend/pages/home.php')) ?>" class="homebutton <?= $activePage === 'home' ? 'active' : '' ?>">Home</a>
 
         <?php if ($isMatched): ?>
             <a href="<?= e(base_url('frontend/pages/match_space.php')) ?>" class="<?= $activePage === 'match' ? 'active' : '' ?>">Match</a>
@@ -20,11 +25,12 @@ $isMatched  = !empty($currentUser['is_matched']) && !empty($currentUser['current
 
         <a href="<?= e(base_url('frontend/pages/public_reasons.php')) ?>" class="<?= $activePage === 'public_reasons' ? 'active' : '' ?>">Public reasons</a>
 
-        <a href="<?= e(base_url('frontend/pages/edit_profile.php')) ?>" class="wl-profile-icon" title="Edit profile">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="8" r="4"/>
-                <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
-            </svg>
+        <!-- george = die klein rondte ikoon met die gebruiker se eerste letter -->
+        <a href="<?= e(base_url('frontend/pages/edit_profile.php')) ?>" class="george" title="Edit profile">
+            <?= e(strtoupper(substr($currentUser['first_name'] ?? '?', 0, 1))) ?>
         </a>
+
+        <!-- vinnige uitteken-skakel sodat dit maklik is om tussen toets-rekeninge te spring wanneer jy wys hoe dit werk -->
+        <a href="<?= e(base_url('frontend/pages/logout.php')) ?>" class="logoutbtn" title="Log out">Log out</a>
     </div>
 </nav>

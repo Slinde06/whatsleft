@@ -29,13 +29,13 @@ $photos = get_user_photos($pdo, $partner['id']);
 
 <?php require __DIR__ . '/../../includes/nav.php'; ?>
 
-<div class="wl-page">
+<div class="pagebox">
     <div class="row g-4">
         <div class="col-lg-5">
             <h1 class="text-white h2">Before you can match again</h1>
             <p class="text-white-50">You&rsquo;ve chosen to unmatch. On What&rsquo;s Left, this decision and the reason behind it becomes part of your public profile and theirs, permanently.</p>
 
-            <div class="wl-photo-frame mt-3">
+            <div class="photoframe mt-3">
                 <div class="photo-box mb-3">
                     <img src="<?= e(photo_url($photos[0]['photo_path'] ?? null)) ?>" alt="<?= e($partner['first_name']) ?>">
                 </div>
@@ -53,24 +53,24 @@ $photos = get_user_photos($pdo, $partner['id']);
             <div class="mb-3">
                 <label class="text-white">Reason:</label>
                 <label class="text-white-50 d-block" style="font-size:.85rem;">short description:</label>
-                <input type="text" class="form-control wl-input" id="reason-short" maxlength="150">
+                <input type="text" class="form-control inputbox" id="reason-short" maxlength="150">
             </div>
             <div class="mb-3">
                 <label class="text-white-50" style="font-size:.85rem;">Long description (as much detail as possible):</label>
-                <textarea class="form-control wl-input" id="reason-long" rows="6"></textarea>
+                <textarea class="form-control inputbox" id="reason-long" rows="6"></textarea>
             </div>
 
-            <div class="wl-rules-box">
-                <div class="wl-rules-title">This will be public and permanent</div>
+            <div class="rulesbox">
+                <div class="rulestitle">This will be public and permanent</div>
                 <ul>
                     <li>Once published, this reason cannot be edited or removed.</li>
-                    <li>You have one undo across your entire account &mdash; using it here means you can&rsquo;t use it again later.</li>
+                    <li>You have one undo across your entire account - using it here means you can&rsquo;t use it again later.</li>
                 </ul>
             </div>
 
             <div class="d-flex justify-content-between mt-4">
-                <a href="<?= e(base_url('frontend/pages/match_space.php')) ?>" class="btn btn-wl-secondary">Back</a>
-                <button class="btn btn-wl-primary" id="save-unmatch-btn">Save and unmatch</button>
+                <a href="<?= e(base_url('frontend/pages/match_space.php')) ?>" class="btn pinkbutton">Back</a>
+                <button class="btn mainbutton" id="save-unmatch-btn">Save and unmatch</button>
             </div>
         </div>
     </div>
@@ -87,7 +87,7 @@ $photos = get_user_photos($pdo, $partner['id']);
         errorBox.innerHTML = '';
 
         if (!reasonShort || !reasonLong) {
-            errorBox.innerHTML = '<div class="wl-alert-error">Both a short and a detailed reason are required.</div>';
+            errorBox.innerHTML = '<div class="uhohbox">Both a short and a detailed reason are required.</div>';
             return;
         }
 
@@ -103,7 +103,7 @@ $photos = get_user_photos($pdo, $partner['id']);
             if (data.success) {
                 window.location.href = <?= json_encode(base_url('frontend/pages/home.php')) ?>;
             } else {
-                errorBox.innerHTML = '<div class="wl-alert-error">' + (data.error || 'Could not unmatch.') + '</div>';
+                errorBox.innerHTML = '<div class="uhohbox">' + (data.error || 'Could not unmatch.') + '</div>';
             }
         });
     });

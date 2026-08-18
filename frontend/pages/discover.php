@@ -2,7 +2,7 @@
 $activePage = 'discover';
 require_once __DIR__ . '/../../includes/auth.php';
 
-// Already matched? There's nothing to discover - send them to their MatchSpace.
+// Al gematch? Daar's niks meer om te ontdek nie - stuur hulle na hul MatchSpace toe.
 if (!empty($currentUser['is_matched']) && !empty($currentUser['current_match_id'])) {
     redirect(base_url('frontend/pages/match_space.php'));
 }
@@ -20,7 +20,7 @@ if (!empty($currentUser['is_matched']) && !empty($currentUser['current_match_id'
 
 <?php require __DIR__ . '/../../includes/nav.php'; ?>
 
-<div class="wl-page" id="discover-app">
+<div class="pagebox" id="discover-app">
 
     <div id="skip-badge" class="text-center mb-3 fw-bold" style="color:var(--peach); display:none;">
         1 SKIP REMAINING
@@ -28,47 +28,48 @@ if (!empty($currentUser['is_matched']) && !empty($currentUser['current_match_id'
 
     <div id="loading-state" class="text-center text-white py-5">Loading the next profile&hellip;</div>
 
-    <div id="no-more-state" class="wl-panel text-center py-5" style="display:none;">
+    <div id="no-more-state" class="bigbox text-center py-5" style="display:none;">
         <h2>That&rsquo;s everyone.</h2>
-        <p>There&rsquo;s no one left to discover right now &mdash; check back later.</p>
-        <a href="<?= e(base_url('frontend/pages/home.php')) ?>" class="btn btn-wl-outline">Back to Home</a>
+        <p>There&rsquo;s no one left to discover right now - check back later.</p>
+        <a href="<?= e(base_url('frontend/pages/home.php')) ?>" class="btn outlinebutton">Back to Home</a>
     </div>
 
     <div class="row g-4" id="candidate-state" style="display:none;">
         <div class="col-lg-4">
-            <div class="wl-photo-frame">
+            <div class="photoframe">
                 <div class="photo-box mb-3">
                     <img id="c-photo" src="" alt="Candidate photo">
                 </div>
                 <div class="d-flex gap-2">
-                    <button class="btn btn-wl-secondary flex-fill" id="dislike-btn">Dislike</button>
-                    <button class="btn btn-wl-primary flex-fill" id="like-btn">Like</button>
+                    <button class="btn pinkbutton flex-fill" id="dislike-btn">Dislike</button>
+                    <button class="btn mainbutton flex-fill" id="like-btn">Like</button>
                 </div>
             </div>
         </div>
 
         <div class="col-lg-5">
-            <div class="wl-panel">
+            <div class="bigbox">
                 <h1 id="c-name" class="h2"></h1>
                 <p id="c-location" class="mb-3"></p>
                 <p id="c-description"></p>
                 <div id="c-hobbies" class="mb-3"></div>
 
-                <div class="wl-slider-card">
+                <div class="sliderbox">
                     <h3 class="h6 mb-3">Personality / Behaviors</h3>
-                    <div class="wl-slider">
+                    <p class="slidertext">How this person placed themselves on each scale.</p>
+                    <div class="slider1">
                         <div class="labels"><span>Introvert</span><span>Extrovert</span></div>
                         <input type="range" min="0" max="100" id="p-ie" disabled>
                     </div>
-                    <div class="wl-slider">
+                    <div class="slider1">
                         <div class="labels"><span>Analytical</span><span>Creative</span></div>
                         <input type="range" min="0" max="100" id="p-ac" disabled>
                     </div>
-                    <div class="wl-slider">
+                    <div class="slider1">
                         <div class="labels"><span>Tech Savvy</span><span>Not Technical</span></div>
                         <input type="range" min="0" max="100" id="p-ts" disabled>
                     </div>
-                    <div class="wl-slider mb-0">
+                    <div class="slider1 mb-0">
                         <div class="labels"><span>Sporty</span><span>Un-sporty</span></div>
                         <input type="range" min="0" max="100" id="p-sp" disabled>
                     </div>
@@ -77,15 +78,15 @@ if (!empty($currentUser['is_matched']) && !empty($currentUser['current_match_id'
         </div>
 
         <div class="col-lg-3">
-            <div class="wl-rules-box mb-3">
-                <div class="wl-rules-title">BEFORE YOU DECIDE</div>
+            <div class="rulesbox mb-3">
+                <div class="rulestitle">BEFORE YOU DECIDE</div>
                 <ul>
                     <li>You may skip exactly one profile, ever.</li>
                     <li>Passing (Dislike) requires a public, detailed reason.</li>
-                    <li>Matching moves you to a shared space &mdash; you can&rsquo;t browse again unless it ends.</li>
+                    <li>Matching moves you to a shared space - you can&rsquo;t browse again unless it ends.</li>
                 </ul>
             </div>
-            <button class="btn btn-wl-outline w-100" id="skip-btn">Next (use 1-time skip)</button>
+            <button class="btn outlinebutton w-100" id="skip-btn">Next (use 1-time skip)</button>
             <div id="action-message" class="mt-3"></div>
         </div>
     </div>
@@ -93,7 +94,7 @@ if (!empty($currentUser['is_matched']) && !empty($currentUser['current_match_id'
 
 <?php require __DIR__ . '/../../includes/footer.php'; ?>
 
-<!-- Dislike reason modal -->
+<!-- Dislike-rede modal -->
 <div class="modal fade" id="dislikeModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -111,11 +112,11 @@ if (!empty($currentUser['is_matched']) && !empty($currentUser['current_match_id'
             <label>Long description (as much detail as possible):</label>
             <textarea class="form-control" id="reason-long" rows="4"></textarea>
         </div>
-        <div class="wl-alert-error" id="reason-error" style="display:none;"></div>
+        <div class="uhohbox" id="reason-error" style="display:none;"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-wl-secondary" data-bs-dismiss="modal">Back</button>
-        <button type="button" class="btn btn-wl-primary" id="confirm-dislike-btn">Save and pass</button>
+        <button type="button" class="btn pinkbutton" data-bs-dismiss="modal">Back</button>
+        <button type="button" class="btn mainbutton" id="confirm-dislike-btn">Save and pass</button>
       </div>
     </div>
   </div>

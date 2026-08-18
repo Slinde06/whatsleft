@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * includes/functions.php
+ * Klein herbruikbare helper funksies wat oor bladsye en api endpoints gebruik word.
+ */
 
 function e($value) {
     return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8');
@@ -44,7 +47,9 @@ function get_user_personality(PDO $pdo, int $userId) {
     return $row;
 }
 
-
+/**
+ * Die id van die gebruiker se lewende match-vennoot, of null as hulle nie tans gematch is nie.
+ */
 function get_match_partner_id(PDO $pdo, int $userId, int $matchId) {
     $stmt = $pdo->prepare('SELECT user1_id, user2_id FROM matches WHERE id = ?');
     $stmt->execute([$matchId]);
@@ -65,12 +70,17 @@ function redirect(string $path) {
     exit;
 }
 
-
+/**
+ * Bou 'n URL vanaf die projek se root af, bv. base_url('frontend/pages/home.php').
+ * Werk maak nie saak onder watter folder naam hierdie projek in htdocs/ sit nie.
+ */
 function base_url(string $path = '') {
     return APP_URL_BASE . '/' . ltrim($path, '/');
 }
 
-
+/**
+ * Pad na 'n gebruiker se foto vir gebruik in <img src="">, val terug op 'n placeholder.
+ */
 function photo_url($photoPath) {
     if (empty($photoPath)) {
         return base_url('frontend/assets/images/placeholder-photo.svg');

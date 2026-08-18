@@ -20,6 +20,7 @@ $messages = array_map(function ($m) {
     ];
 }, $rows);
 
+// As die match geëindig het (bv. die ander persoon het unmatch gedoen), sê vir die client sodat hy kan redirect.
 $statusStmt = $pdo->prepare('SELECT status FROM matches WHERE id = ?');
 $statusStmt->execute([$matchId]);
 $status = $statusStmt->fetch()['status'] ?? 'ended';

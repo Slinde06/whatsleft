@@ -44,7 +44,7 @@ try {
     );
     $stmt->execute([$firstName, $lastName, $email, $lookingFor, $location, $description, $currentUser['id']]);
 
-
+    // Vervang hobby tags.
     $pdo->prepare('DELETE FROM user_hobbies WHERE user_id = ?')->execute([$currentUser['id']]);
     if (!empty($hobbies)) {
         $hobbyStmt = $pdo->prepare('INSERT INTO user_hobbies (user_id, hobby) VALUES (?, ?)');
@@ -56,7 +56,7 @@ try {
         }
     }
 
-
+    // Upsert personality sliders (voeg in of werk by).
     $ie = max(0, min(100, (int) ($personality['introvert_extrovert'] ?? 50)));
     $ac = max(0, min(100, (int) ($personality['analytical_creative'] ?? 50)));
     $ts = max(0, min(100, (int) ($personality['tech_savvy'] ?? 50)));

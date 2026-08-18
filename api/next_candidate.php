@@ -5,6 +5,7 @@ if (!empty($currentUser['is_matched'])) {
     json_response(['success' => false, 'error' => 'You are already in a match.'], 422);
 }
 
+// Volgende kandidaat = 'n gebruiker, nie ek nie, wat ek nog nie op geswipe het nie, en wat nie tans met iemand anders gematch is nie.
 $stmt = $pdo->prepare(
     "SELECT * FROM users
      WHERE id != ?

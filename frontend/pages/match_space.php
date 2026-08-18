@@ -11,7 +11,7 @@ $partnerId = get_match_partner_id($pdo, (int) $currentUser['id'], $matchId);
 $partner = $partnerId ? get_user($pdo, $partnerId) : null;
 
 if (!$partner) {
-    // Data inconsistency safeguard - reset and send back to discover.
+    // Bewaarmiddel vir data-teenstrydigheid - herstel en stuur terug na discover toe.
     redirect(base_url('frontend/pages/discover.php'));
 }
 
@@ -36,10 +36,10 @@ $messages = $msgStmt->fetchAll();
 
 <?php require __DIR__ . '/../../includes/nav.php'; ?>
 
-<div class="wl-page">
+<div class="pagebox">
     <div class="row g-4">
         <div class="col-lg-4">
-            <div class="wl-photo-frame mb-3">
+            <div class="photoframe mb-3">
                 <div class="photo-box mb-3">
                     <img src="<?= e(photo_url($photos[0]['photo_path'] ?? null)) ?>" alt="<?= e($partner['first_name']) ?>">
                 </div>
@@ -49,25 +49,26 @@ $messages = $msgStmt->fetchAll();
             <p class="text-white"><?= nl2br(e($partner['description'])) ?></p>
             <div>
                 <?php foreach ($hobbies as $hobby): ?>
-                    <span class="wl-tag"><?= e($hobby) ?></span>
+                    <span class="appletag"><?= e($hobby) ?></span>
                 <?php endforeach; ?>
             </div>
 
-            <div class="wl-slider-card mt-3">
+            <div class="sliderbox mt-3">
                 <h3 class="h6 mb-3">Personality / Behaviors</h3>
-                <div class="wl-slider">
+                <p class="slidertext">Where <?= e($partner['first_name']) ?> placed themselves on each scale - the closer to an end, the stronger that trait.</p>
+                <div class="slider1">
                     <div class="labels"><span>Introvert</span><span>Extrovert</span></div>
                     <input type="range" min="0" max="100" value="<?= (int) $personality['introvert_extrovert'] ?>" disabled>
                 </div>
-                <div class="wl-slider">
+                <div class="slider1">
                     <div class="labels"><span>Analytical</span><span>Creative</span></div>
                     <input type="range" min="0" max="100" value="<?= (int) $personality['analytical_creative'] ?>" disabled>
                 </div>
-                <div class="wl-slider">
+                <div class="slider1">
                     <div class="labels"><span>Tech Savvy</span><span>Not Technical</span></div>
                     <input type="range" min="0" max="100" value="<?= (int) $personality['tech_savvy'] ?>" disabled>
                 </div>
-                <div class="wl-slider mb-0">
+                <div class="slider1 mb-0">
                     <div class="labels"><span>Sporty</span><span>Un-sporty</span></div>
                     <input type="range" min="0" max="100" value="<?= (int) $personality['sporty'] ?>" disabled>
                 </div>
@@ -75,23 +76,34 @@ $messages = $msgStmt->fetchAll();
         </div>
 
         <div class="col-lg-8">
-            <div class="wl-panel">
+            <div class="bigbox">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 class="h4 mb-0">Your shared space with <?= e($partner['first_name']) ?></h2>
-                    <a href="<?= e(base_url('frontend/pages/unmatch_reason.php')) ?>" class="btn btn-wl-secondary btn-sm">Unmatch</a>
+                    <div class="d-flex gap-2 align-items-center">
+                        <!-- klein demo-net kortpad: eindig die match onmiddellik sonder 'n
+                             publieke rede, net sodat dit vinnig is om te herstel terwyl jy
+                             vir mense wys hoe die werf werk. die regte "Unmatch" vloei
+                             (met die publieke rede) bly dieselfde. -->
+                        <button class="btn outlinebutton2 btn-sm" id="quick-unmatch-btn" title="Demo only - instantly unmatch, no reason needed">Quick unmatch (demo)</button>
+                        <a href="<?= e(base_url('frontend/pages/unmatch_reason.php')) ?>" class="btn pinkbutton btn-sm">Unmatch</a>
+                    </div>
                 </div>
+                <div id="quick-unmatch-message"></div>
 
-                <div class="wl-chat-window" id="chat-window">
+                <div class="chatbox" id="chat-window">
+                    <?php if (empty($messages)): ?>
+                        <p class="text-muted text-center mt-3" id="chat-empty-msg">No messages yet - say hi to <?= e($partner['first_name']) ?>!</p>
+                    <?php endif; ?>
                     <?php foreach ($messages as $m): ?>
-                        <div class="wl-chat-bubble <?= $m['sender_id'] == $currentUser['id'] ? 'mine' : 'theirs' ?>">
+                        <div class="bubble1 <?= $m['sender_id'] == $currentUser['id'] ? 'mine' : 'theirs' ?>">
                             <?= nl2br(e($m['message'])) ?>
                         </div>
                     <?php endforeach; ?>
                 </div>
 
                 <form id="chat-form" class="d-flex gap-2 mt-3">
-                    <input type="text" id="chat-input" class="form-control wl-input" placeholder="Say something..." autocomplete="off" required>
-                    <button type="submit" class="btn btn-wl-primary">Send</button>
+                    <input type="text" id="chat-input" class="form-control inputbox" placeholder="Say something..." autocomplete="off" required>
+                    <button type="submit" class="btn mainbutton">Send</button>
                 </form>
             </div>
         </div>
@@ -109,5 +121,21 @@ $messages = $msgStmt->fetchAll();
     };
 </script>
 <script src="<?= e(base_url('frontend/assets/js/chat.js')) ?>"></script>
+<script>
+    // Net vir demo doeleindes - quick unmatch knoppie, spring die publieke rede stap heeltemal oor.
+    document.getElementById('quick-unmatch-btn').addEventListener('click', function () {
+        if (!confirm('Demo unmatch: this instantly ends the match with no reason needed. Continue?')) return;
+        fetch(<?= json_encode(base_url('api/quick_unmatch_action.php')) ?>, { method: 'POST' })
+            .then(r => r.json())
+            .then(data => {
+                const box = document.getElementById('quick-unmatch-message');
+                if (data.success) {
+                    window.location.href = <?= json_encode(base_url('frontend/pages/home.php')) ?>;
+                } else {
+                    box.innerHTML = '<div class="uhohbox">' + (data.error || 'Could not unmatch.') + '</div>';
+                }
+            });
+    });
+</script>
 </body>
 </html>
