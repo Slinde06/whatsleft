@@ -192,6 +192,19 @@ a:hover { color: var(--cta); }
     background: var(--white); color: var(--navy);
 }
 
+/* die eenmalige "gaan terug" knoppie - peach outline sodat dit opval as iets spesiaal, eenmalig */
+.discover-button-back {
+    background: transparent;
+    border: 2px solid var(--peach);
+    color: var(--peach);
+    padding: 0.55rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+.discover-button-back:hover {
+    background: var(--peach); color: var(--navy);
+}
+
 /* vir die klein "demo" knoppies wat op ligte paneele sit, waar die wit
    outline knoppie nie goed sigbaar is nie */
 .match-button-quick-unmatch {

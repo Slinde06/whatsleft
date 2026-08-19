@@ -24,7 +24,7 @@ if ($target['is_matched']) {
 }
 
 // Al klaar op hierdie persoon geswipe? Moenie dubbel-swipe toelaat nie.
-$dupe = $pdo->prepare('SELECT id FROM swipes WHERE swiper_id = ? AND target_id = ?');
+$dupe = $pdo->prepare('SELECT id FROM swipes WHERE swiper_id = ? AND target_id = ? AND undone = 0');
 $dupe->execute([$currentUser['id'], $targetId]);
 if ($dupe->fetch()) {
     json_response(['success' => false, 'error' => 'You already made a decision on this profile.'], 409);

@@ -7,16 +7,18 @@
     let currentCandidateId = null;
     let skipUsedFlag = false;
     let repeatSkipMode = false;
+    let dislikeUndoUsedFlag = false;      // has the 1-time "go back" already been spent?
 
     const loadingState   = document.getElementById('loading-state');
     const noMoreState    = document.getElementById('no-more-state');
     const candidateState = document.getElementById('candidate-state');
     const skipBadge      = document.getElementById('skip-badge');
     const actionMessage  = document.getElementById('action-message');
-    const skipBtn        = document.getElementById('skip-btn');
+    // const skipBtn        = document.getElementById('skip-btn'); // skip button disabled
     const nextBtn        = document.getElementById('next-btn');
     const likeBtn        = document.getElementById('like-btn');
     const dislikeBtn     = document.getElementById('dislike-btn');
+    const rewindBtn      = document.getElementById('rewind-btn');
 
     function showState(name) {
         loadingState.style.display = name === 'loading' ? '' : 'none';
@@ -46,10 +48,16 @@
         document.getElementById('p-sp').value = c.personality.sporty;
     }
 
-    function loadNext() {
+    function loadNext(targetId) {
         showState('loading');
         actionMessage.innerHTML = '';
-        fetch(base + 'api/next_candidate.php')
+
+        // targetId is only passed right after a successful "go back" - it re-opens
+        // that one profile instead of pulling the next candidate in line.
+        const url = targetId ? base + 'api/next_candidate.php?target_id=' + targetId
+                              : base + 'api/next_candidate.php';
+
+        fetch(url)
             .then(r => r.json())
             .then(data => {
                 if (!data.success) {
@@ -58,6 +66,8 @@
                     return;
                 }
                 skipBadge.style.display = data.skip_used ? 'none' : '';
+                dislikeUndoUsedFlag = !!data.dislike_undo_used;
+
                 if (data.done) {
                     showState('none');
                 } else {
@@ -71,21 +81,26 @@
                         likeBtn.style.display = 'none';
                         dislikeBtn.style.display = '';
                         dislikeBtn.textContent = 'Skip';
-                        skipBtn.style.display = 'none';
+                        // skipBtn.style.display = 'none'; // skip button disabled
                         nextBtn.style.display = 'none';
+                        rewindBtn.style.display = 'none';
                     } else if (alreadyDecided) {
                         likeBtn.style.display = 'none';
                         dislikeBtn.style.display = 'none';
-                        skipBtn.style.display = 'none';
+                        // skipBtn.style.display = 'none'; // skip button disabled
                         nextBtn.style.display = '';
+                        rewindBtn.style.display = 'none';
                     } else {
                         likeBtn.style.display = '';
                         dislikeBtn.style.display = '';
                         nextBtn.style.display = 'none';
-                        skipBtn.style.display = skipUsedFlag ? 'none' : '';
-                        skipBtn.disabled = false;
-                        skipBtn.textContent = 'Next (use 1-time skip)';
+                        // skipBtn.style.display = skipUsedFlag ? 'none' : ''; // skip button disabled
+                        // skipBtn.disabled = false; // skip button disabled
+                        // skipBtn.textContent = 'Next (use 1-time skip)'; // skip button disabled
                         dislikeBtn.textContent = skipUsedFlag ? 'Skip' : 'Dislike';
+
+                        // Only ever offered once per account - hide it for good once it's spent.
+                        rewindBtn.style.display = dislikeUndoUsedFlag ? 'none' : '';
                     }
                     showState('candidate');
                 }
@@ -113,22 +128,23 @@
         });
     });
 
-    document.getElementById('skip-btn').addEventListener('click', function () {
-        if (!currentCandidateId) return;
-        fetch(base + 'api/skip_action.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ target_id: currentCandidateId })
-        })
-        .then(r => r.json())
-        .then(data => {
-            if (data.success) {
-                loadNext();
-            } else {
-                actionMessage.innerHTML = '<div class="uhohbox">' + (data.error || 'Could not skip.') + '</div>';
-            }
-        });
-    });
+    // skip button disabled - handler kept for reference
+    // document.getElementById('skip-btn').addEventListener('click', function () {
+    //     if (!currentCandidateId) return;
+    //     fetch(base + 'api/skip_action.php', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({ target_id: currentCandidateId })
+    //     })
+    //     .then(r => r.json())
+    //     .then(data => {
+    //         if (data.success) {
+    //             loadNext();
+    //         } else {
+    //             actionMessage.innerHTML = '<div class="uhohbox">' + (data.error || 'Could not skip.') + '</div>';
+    //         }
+    //     });
+    // });
 
     // ---- Dislike vloei (maak die rede modal oop) ----
     const dislikeModalEl = document.getElementById('dislikeModal');
@@ -197,6 +213,26 @@
 
     nextBtn.addEventListener('click', function () {
         loadNext();
+    });
+
+    // ---- Go back (1-time-per-account rewind to the last person you disliked) ----
+    rewindBtn.addEventListener('click', function () {
+        rewindBtn.disabled = true;
+
+        fetch(base + 'api/undo_dislike_action.php', { method: 'POST' })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    loadNext(data.target_id);
+                } else {
+                    rewindBtn.disabled = false;
+                    actionMessage.innerHTML = '<div class="uhohbox">' + (data.error || 'Could not go back.') + '</div>';
+                }
+            })
+            .catch(() => {
+                rewindBtn.disabled = false;
+                actionMessage.innerHTML = '<div class="uhohbox">Could not reach the server.</div>';
+            });
     });
 
     loadNext();

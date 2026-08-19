@@ -84,10 +84,15 @@ if (!empty($currentUser['is_matched']) && !empty($currentUser['current_match_id'
                     <li>You may skip exactly one profile with no reason, ever - after that, Dislike itself becomes a quick skip.</li>
                     <li>Passing (Dislike) requires a public, detailed reason until your one skip is used.</li>
                     <li>Matching moves you to a shared space - you can&rsquo;t browse again unless it ends.</li>
+                    <li>You get exactly one lifetime &ldquo;go back&rdquo; to revisit the last person you disliked.</li>
                 </ul>
             </div>
-            <button class="btn discover-button-skip w-100" id="skip-btn">Next (use 1-time skip)</button>
+            <!-- <button class="btn discover-button-skip w-100" id="skip-btn">Next (use 1-time skip)</button> -->
             <button class="btn discover-button-skip w-100" id="next-btn" style="display:none;">Next</button>
+
+            <!-- One-time-per-account rewind: jumps back to the last person you disliked. -->
+            <button class="btn discover-button-back w-100 mt-2" id="rewind-btn" style="display:none;">Go back to last dislike (1-time)</button>
+
             <div id="action-message" class="mt-3"></div>
         </div>
     </div>
