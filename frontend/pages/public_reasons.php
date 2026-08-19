@@ -25,12 +25,12 @@ $photoStmt = $pdo->prepare('SELECT photo_path FROM user_photos WHERE user_id = ?
 
 <?php require __DIR__ . '/../../includes/nav.php'; ?>
 
-<div class="leaderboardpic" style="background-image: linear-gradient(180deg, rgba(15,16,21,.35), rgba(15,16,21,.85)), url('<?= e(base_url('frontend/assets/images/stefan-stefancik-QXevDflbl8A-unsplash.jpg')) ?>');">
+<div class="public-reasons-leaderboardpic-top" style="background-image: linear-gradient(180deg, rgba(15,16,21,.35), rgba(15,16,21,.85)), url('<?= e(base_url('frontend/assets/images/stefan-stefancik-QXevDflbl8A-unsplash.jpg')) ?>');">
     <h1>Public reasons</h1>
     <p>Every pass, every unmatch, and the reason behind it - on the record, for everyone to see.</p>
 </div>
 
-<div class="pagebox leaderboard1">
+<div class="public-reasons-pagebox-main public-reasons-leaderboard1-main">
     <h1 class="text-white mb-4">Leaderboard:</h1>
 
     <div class="table-responsive">

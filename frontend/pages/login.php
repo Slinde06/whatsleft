@@ -13,6 +13,7 @@ if (!empty($_SESSION['user_id']) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
     unset($_SESSION['user_id']);
 }
 
+$activePage = 'login';
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -46,29 +47,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-<nav class="topbar">
-    <a href="<?= e(base_url('frontend/pages/login.php')) ?>" class="logostuff">
+<nav class="login-nav-bar-top">
+    <a href="<?= e(base_url('frontend/pages/login.php')) ?>" class="login-nav-logo-top">
         <img src="<?= e(base_url('frontend/assets/images/logo.svg')) ?>" alt="What's Left logo">
         What&rsquo;s Left
     </a>
     <div>
-        <a href="<?= e(base_url('frontend/pages/signup.php')) ?>">Create an account</a>
+        <a href="<?= e(base_url('frontend/pages/signup.php')) ?>" class="login-nav-signup-link-top">Create an account</a>
     </div>
 </nav>
 
-<div class="authwrap">
-    <div class="authside" style="background-image: linear-gradient(180deg, rgba(50,93,128,.55), rgba(50,93,128,.85)), url('<?= e(base_url('frontend/assets/images/priscilla-du-preez-g86airJZ4Gs-unsplash.jpg')) ?>');">
+<div class="login-authwrap-main">
+    <div class="login-authside-main" style="background-image: linear-gradient(180deg, rgba(50,93,128,.55), rgba(50,93,128,.85)), url('<?= e(base_url('frontend/assets/images/priscilla-du-preez-g86airJZ4Gs-unsplash.jpg')) ?>');">
         <blockquote>
             &ldquo;You get one undo, ever. Log in and remember what that means.&rdquo;
         </blockquote>
         <p>What&rsquo;s Left</p>
     </div>
 
-    <div class="authform">
-        <div class="authcard">
-            <div class="tinytext">Welcome back</div>
+    <div class="login-authform-main">
+        <div class="login-authcard-main">
+            <div class="login-tinytext-top">Welcome back</div>
             <h1>Log in</h1>
-            <p class="subtitle">Your record is exactly as you left it.</p>
+            <p class="login-subtitle-tagline">Your record is exactly as you left it.</p>
 
             <?php foreach ($errors as $err): ?>
                 <div class="uhohbox"><?= e($err) ?></div>
@@ -77,15 +78,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="POST" action="">
                 <div class="mb-3">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control inputbox" id="email" name="email" placeholder="exsample@gmail.com" required>
+                    <input type="email" class="form-control login-input-email" id="email" name="email" placeholder="exsample@gmail.com" required>
                 </div>
                 <div class="mb-4">
                     <label for="password">Password:</label>
-                    <input type="password" class="form-control inputbox" id="password" name="password" placeholder="Your password" required>
+                    <input type="password" class="form-control login-input-password" id="password" name="password" placeholder="Your password" required>
                 </div>
-                <button type="submit" class="btn mainbutton w-100">Log in</button>
-                <div class="text-center my-3 subtitle">OR</div>
-                <p class="text-center subtitle mb-0">
+                <button type="submit" class="btn login-button-submit-main w-100">Log in</button>
+                <div class="text-center my-3 login-subtitle-or">OR</div>
+                <p class="text-center login-subtitle-signup-prompt mb-0">
                     Don&rsquo;t have an account?
                     <a href="<?= e(base_url('frontend/pages/signup.php')) ?>">Sign up</a>
                 </p>

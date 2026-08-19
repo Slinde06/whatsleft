@@ -37,8 +37,9 @@ h1, h2, h3, .display {
 a { color: var(--coral); text-decoration: none; }
 a:hover { color: var(--cta); }
 
-/* ---------- Bo-navbar ---------- */
-.topbar {
+/* ---------- Bo-navbar (gedeeld deur nav.php, per-bladsy naam via $activePage) ---------- */
+.home-nav-bar-top, .discover-nav-bar-top, .profile-nav-bar-top, .match-nav-bar-top, .public_reasons-nav-bar-top,
+.login-nav-bar-top, .signup-nav-bar-top {
     background: var(--white);
     padding: 0.9rem 2.5rem;
     display: flex;
@@ -51,7 +52,8 @@ a:hover { color: var(--cta); }
     z-index: 5;
 }
 
-.logostuff {
+.home-nav-logo-top, .discover-nav-logo-top, .profile-nav-logo-top, .match-nav-logo-top, .public_reasons-nav-logo-top,
+.login-nav-logo-top, .signup-nav-logo-top {
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -60,26 +62,26 @@ a:hover { color: var(--cta); }
     color: var(--ink);
 }
 
-.logostuff img { height: 34px; width: 34px; }
+.home-nav-logo-top img, .discover-nav-logo-top img, .profile-nav-logo-top img, .match-nav-logo-top img, .public_reasons-nav-logo-top img,
+.login-nav-logo-top img, .signup-nav-logo-top img {
+    height: 34px; width: 34px;
+}
 
-.navstuff {
+.home-nav-links-top, .discover-nav-links-top, .profile-nav-links-top, .match-nav-links-top, .public_reasons-nav-links-top {
     display: flex;
     align-items: center;
     gap: 1.75rem;
     font-weight: 500;
 }
 
-.navstuff a { color: var(--ink); }
-.navstuff a.active { color: var(--cta); font-weight: 600; }
-
-.navbadge {
-    color: var(--cta);
-    font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.03em;
+.home-nav-links-top a, .discover-nav-links-top a, .profile-nav-links-top a, .match-nav-links-top a, .public_reasons-nav-links-top a {
+    color: var(--ink);
+}
+.home-nav-links-top a.active, .discover-nav-links-top a.active, .profile-nav-links-top a.active, .match-nav-links-top a.active, .public_reasons-nav-links-top a.active {
+    color: var(--cta); font-weight: 600;
 }
 
-.george {
+.home-nav-profile-avatar-top, .discover-nav-profile-avatar-top, .profile-nav-profile-avatar-top, .match-nav-profile-avatar-top, .public_reasons-nav-profile-avatar-top {
     width: 38px;
     height: 38px;
     border-radius: 50%;
@@ -93,7 +95,7 @@ a:hover { color: var(--cta); }
     font-family: var(--font-display);
 }
 
-.logoutbtn {
+.home-nav-logout-link-top, .discover-nav-logout-link-top, .profile-nav-logout-link-top, .match-nav-logout-link-top, .public_reasons-nav-logout-link-top {
     font-size: 0.85rem;
     font-weight: 600;
     color: #8a8494;
@@ -101,14 +103,21 @@ a:hover { color: var(--cta); }
     padding: 0.4rem 0.9rem;
     border-radius: 6px;
 }
-.logoutbtn:hover { color: var(--cta); border-color: var(--cta); }
+.home-nav-logout-link-top:hover, .discover-nav-logout-link-top:hover, .profile-nav-logout-link-top:hover, .match-nav-logout-link-top:hover, .public_reasons-nav-logout-link-top:hover {
+    color: var(--cta); border-color: var(--cta);
+}
 
-/* ---------- Uitleg helpers ---------- */
-.pagebox {
+/* ---------- Uitleg helpers (per-bladsy pagebox/bigbox) ---------- */
+.home-pagebox-undo, .home-pagebox-hero, .home-pagebox-main,
+.discover-pagebox-main,
+.profile-pagebox-main,
+.match-pagebox-main,
+.unmatch-reason-pagebox-main,
+.public-reasons-pagebox-main {
     padding: 2.5rem;
 }
 
-.bigbox {
+.home-bigbox-undo, .discover-bigbox-nomore, .discover-bigbox-middle, .profile-bigbox-right, .match-bigbox-right {
     background: var(--mauve);
     border-radius: 10px;
     padding: 1.75rem;
@@ -116,28 +125,35 @@ a:hover { color: var(--cta); }
     box-shadow: 0 4px 18px rgba(0,0,0,.12);
 }
 
-.bigbox h1, .bigbox h2, .bigbox h3 { color: var(--white); }
+.home-bigbox-undo h1, .home-bigbox-undo h2, .home-bigbox-undo h3,
+.discover-bigbox-nomore h1, .discover-bigbox-nomore h2, .discover-bigbox-nomore h3,
+.discover-bigbox-middle h1, .discover-bigbox-middle h2, .discover-bigbox-middle h3,
+.profile-bigbox-right h1, .profile-bigbox-right h2, .profile-bigbox-right h3,
+.match-bigbox-right h1, .match-bigbox-right h2, .match-bigbox-right h3 {
+    color: var(--white);
+}
 
-.rulesbox {
+.discover-rulesbox-right, .signup-rulesbox-main, .profile-rulesbox-bottom, .unmatch-reason-rulesbox-main {
     background: var(--peach);
     border-radius: 6px;
     padding: 1.25rem 1.5rem;
     color: #5c2a1a;
 }
 
-.rulesbox .rulestitle {
+.discover-rulesbox-title, .signup-rulesbox-title, .profile-rulesbox-title, .unmatch-reason-rulesbox-title {
     color: var(--cta);
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
-.rulesbox ul {
+.discover-rulesbox-right ul, .signup-rulesbox-main ul, .profile-rulesbox-bottom ul, .unmatch-reason-rulesbox-main ul {
     margin: 0;
     padding-left: 1.1rem;
 }
 
 /* ---------- Knoppies ---------- */
-.mainbutton {
+.home-button-cta-bottom, .discover-button-like, .discover-modal-button-confirm, .profile-button-save,
+.login-button-submit-main, .signup-button-submit-main, .match-button-send, .unmatch-reason-button-save {
     background: var(--cta);
     border: none;
     color: var(--white);
@@ -146,9 +162,12 @@ a:hover { color: var(--cta); }
     font-weight: 600;
     transition: background 0.15s ease, transform 0.1s ease;
 }
-.mainbutton:hover { background: var(--cta-hover); color: var(--white); transform: translateY(-1px); }
+.home-button-cta-bottom:hover, .discover-button-like:hover, .discover-modal-button-confirm:hover, .profile-button-save:hover,
+.login-button-submit-main:hover, .signup-button-submit-main:hover, .match-button-send:hover, .unmatch-reason-button-save:hover {
+    background: var(--cta-hover); color: var(--white); transform: translateY(-1px);
+}
 
-.pinkbutton {
+.discover-button-dislike, .discover-modal-button-back, .match-button-unmatch, .unmatch-reason-button-back {
     background: var(--skip-pink);
     border: none;
     color: var(--white);
@@ -157,9 +176,11 @@ a:hover { color: var(--cta); }
     font-weight: 600;
     transition: background 0.15s ease, transform 0.1s ease;
 }
-.pinkbutton:hover { background: #d9748a; color: var(--white); transform: translateY(-1px); }
+.discover-button-dislike:hover, .discover-modal-button-back:hover, .match-button-unmatch:hover, .unmatch-reason-button-back:hover {
+    background: #d9748a; color: var(--white); transform: translateY(-1px);
+}
 
-.outlinebutton {
+.home-button-undo-top, .discover-button-back-home, .discover-button-skip {
     background: transparent;
     border: 2px solid var(--white);
     color: var(--white);
@@ -167,11 +188,13 @@ a:hover { color: var(--cta); }
     border-radius: 6px;
     font-weight: 600;
 }
-.outlinebutton:hover { background: var(--white); color: var(--navy); }
+.home-button-undo-top:hover, .discover-button-back-home:hover, .discover-button-skip:hover {
+    background: var(--white); color: var(--navy);
+}
 
 /* vir die klein "demo" knoppies wat op ligte paneele sit, waar die wit
    outline knoppie nie goed sigbaar is nie */
-.outlinebutton2 {
+.match-button-quick-unmatch {
     background: transparent;
     border: 1.5px solid rgba(255,255,255,.6);
     color: var(--white);
@@ -180,43 +203,60 @@ a:hover { color: var(--cta); }
     font-weight: 600;
     font-size: 0.82rem;
 }
-.outlinebutton2:hover { background: rgba(255,255,255,.15); color: var(--white); }
+.match-button-quick-unmatch:hover { background: rgba(255,255,255,.15); color: var(--white); }
 
 /* ---------- Vorms ---------- */
-.pagebox label {
+.home-pagebox-undo label, .home-pagebox-hero label, .home-pagebox-main label,
+.discover-pagebox-main label, .profile-pagebox-main label, .match-pagebox-main label,
+.unmatch-reason-pagebox-main label, .public-reasons-pagebox-main label {
     color: #d9d3e8;
     font-size: 0.9rem;
     margin-bottom: 0.25rem;
 }
 
-.bigbox label { color: #efe9f5; }
+.home-bigbox-undo label, .discover-bigbox-nomore label, .discover-bigbox-middle label,
+.profile-bigbox-right label, .match-bigbox-right label {
+    color: #efe9f5;
+}
 
-.form-control.inputbox {
+.form-control.login-input-email, .form-control.login-input-password,
+.form-control.signup-input-first-name, .form-control.signup-input-last-name, .form-control.signup-input-email,
+.form-control.signup-input-dob, .form-control.signup-input-looking-for, .form-control.signup-input-password, .form-control.signup-input-confirm-password,
+.form-control.profile-input-description, .form-control.profile-input-location, .form-control.profile-input-hobby,
+.form-control.profile-input-first-name, .form-control.profile-input-last-name, .form-control.profile-input-email,
+.form-control.profile-input-dob, .form-control.profile-input-looking-for,
+.form-control.match-input-chat, .form-control.unmatch-reason-input-short, .form-control.unmatch-reason-input-long {
     border-radius: 6px;
     border: 1px solid transparent;
     padding: 0.65rem 0.9rem;
     transition: border-color .15s ease, box-shadow .15s ease;
 }
-.form-control.inputbox:focus {
+.form-control.login-input-email:focus, .form-control.login-input-password:focus,
+.form-control.signup-input-first-name:focus, .form-control.signup-input-last-name:focus, .form-control.signup-input-email:focus,
+.form-control.signup-input-dob:focus, .form-control.signup-input-looking-for:focus, .form-control.signup-input-password:focus, .form-control.signup-input-confirm-password:focus,
+.form-control.profile-input-description:focus, .form-control.profile-input-location:focus, .form-control.profile-input-hobby:focus,
+.form-control.profile-input-first-name:focus, .form-control.profile-input-last-name:focus, .form-control.profile-input-email:focus,
+.form-control.profile-input-dob:focus, .form-control.profile-input-looking-for:focus,
+.form-control.match-input-chat:focus, .form-control.unmatch-reason-input-short:focus, .form-control.unmatch-reason-input-long:focus {
     border-color: var(--cta);
     box-shadow: 0 0 0 3px rgba(163,46,82,.15);
 }
 
 /* die chat-typkassie moet duidelik lyk asof jy daarin kan tik, so gee dit
    'n regte grens (nie net platte wit soos die ander inputs nie). */
-#chat-input.inputbox {
+#chat-input.match-input-chat {
     border: 1px solid #cfc9db;
 }
-#chat-input.inputbox:focus {
+#chat-input.match-input-chat:focus {
     border-color: var(--cta);
 }
 
 /* ---------- Auth bladsye (login / signup) ---------- */
-.authwrap {
+.login-authwrap-main, .signup-authwrap-main {
     min-height: calc(100vh - 70px);
     display: flex;
 }
-.authside {
+.login-authside-main, .signup-authside-main {
     flex: 1;
     background: var(--mauve);
     background-size: cover;
@@ -229,12 +269,12 @@ a:hover { color: var(--cta); }
     position: relative;
     overflow: hidden;
 }
-.authside blockquote {
+.login-authside-main blockquote, .signup-authside-main blockquote {
     font-family: var(--font-display);
     font-size: 1.5rem;
     max-width: 30rem;
 }
-.authform {
+.login-authform-main, .signup-authform-main {
     flex: 1;
     background: var(--navy);
     display: flex;
@@ -242,15 +282,21 @@ a:hover { color: var(--cta); }
     justify-content: center;
     padding: 3rem;
 }
-.authcard { max-width: 32rem; width: 100%; }
-.tinytext { color: var(--coral); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; }
+.login-authcard-main { max-width: 32rem; width: 100%; }
+.signup-authcard-main { max-width: 32rem; width: 100%; }
+.login-tinytext-top, .signup-tinytext-top, .home-tinytext-hero, .home-tinytext-steps {
+    color: var(--coral); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+}
 /* was color: var(--ink) wat donker navy teks op 'n donker navy kaart agtergrond gee - moeilik om te lees.
    verander na wit sodat die opskrif regtig uitstaan. */
-.authcard h1 { color: var(--white); }
-.authcard .subtitle { color: #d9d3e8; margin-bottom: 1.5rem; }
+.login-authcard-main h1, .signup-authcard-main h1 { color: var(--white); }
+.login-subtitle-tagline, .login-subtitle-or, .login-subtitle-signup-prompt,
+.signup-subtitle-tagline, .signup-subtitle-or, .signup-subtitle-login-prompt {
+    color: #d9d3e8; margin-bottom: 1.5rem;
+}
 
 /* ---------- Tuisblad hero kant-prente ---------- */
-.herosection {
+.home-herosection-top {
     background:
         linear-gradient(180deg, rgba(50,93,128,.75), rgba(50,93,128,.96)),
         url('../images/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg');
@@ -259,14 +305,14 @@ a:hover { color: var(--cta); }
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
-.sidepic {
+.home-sidepic-left, .home-sidepic-right {
     min-height: 320px;
     border-radius: 10px;
     overflow: hidden;
     background: var(--mauve);
     box-shadow: 0 8px 24px rgba(0,0,0,.25);
 }
-.sidepic img {
+.home-sidepic-left img, .home-sidepic-right img {
     width: 100%;
     height: 100%;
     min-height: 320px;
@@ -274,21 +320,21 @@ a:hover { color: var(--cta); }
     display: block;
 }
 
-.featurecard {
+.home-featurecard-one-match, .home-featurecard-one-undo, .home-featurecard-nothing-deleted {
     background: rgba(255,255,255,.04);
     border: 1px solid rgba(255,255,255,.08);
     border-radius: 10px;
     padding: 1.75rem 1.25rem;
     height: 100%;
 }
-.featureicon {
+.home-featureicon-one-match, .home-featureicon-one-undo, .home-featureicon-nothing-deleted {
     font-family: var(--font-display);
     font-size: 1.6rem;
     color: var(--peach);
     margin-bottom: .5rem;
 }
 
-.stepcard {
+.home-stepcard-1-build-profile, .home-stepcard-2-meet-one, .home-stepcard-3-decide, .home-stepcard-4-live-in-space {
     display: flex;
     gap: 1rem;
     align-items: flex-start;
@@ -296,7 +342,7 @@ a:hover { color: var(--cta); }
     border-radius: 10px;
     padding: 1.25rem;
 }
-.stepnum {
+.home-stepnum-1-build-profile, .home-stepnum-2-meet-one, .home-stepnum-3-decide, .home-stepnum-4-live-in-space {
     flex: 0 0 auto;
     width: 34px;
     height: 34px;
@@ -310,19 +356,19 @@ a:hover { color: var(--cta); }
     font-family: var(--font-display);
 }
 
-.ctaband {
+.home-ctaband-bottom {
     background: linear-gradient(180deg, #14151b, #0b0c10);
     padding: 3.5rem 1.5rem;
     text-align: center;
 }
 
-/* ---------- Discover kaart ---------- */
-.photoframe {
+/* ---------- Discover / match / unmatch kaarte ---------- */
+.discover-photoframe-left, .profile-photoframe-left, .match-photoframe-left, .unmatch-reason-photoframe-left {
     background: var(--mauve);
     border-radius: 10px;
     padding: 1.25rem;
 }
-.photoframe .photo-box {
+.discover-photo-box-left, .profile-photo-box-primary, .match-photo-box-left, .unmatch-reason-photo-box-left {
     background: var(--white);
     border-radius: 6px;
     width: 100%;
@@ -332,9 +378,11 @@ a:hover { color: var(--cta); }
     justify-content: center;
     overflow: hidden;
 }
-.photoframe .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+.discover-photo-box-left img, .profile-photo-box-primary img, .match-photo-box-left img, .unmatch-reason-photo-box-left img {
+    width: 100%; height: 100%; object-fit: cover;
+}
 
-.sliderbox {
+.discover-sliderbox-personality, .profile-sliderbox-personality, .match-sliderbox-personality {
     background: var(--white);
     border-radius: 10px;
     padding: 1.75rem;
@@ -344,60 +392,80 @@ a:hover { color: var(--cta); }
 /* die kaart se agtergrond is wit, maar hy sit binne 'n bigbox wat wit teks
    opdwing - dit maak die opskrifte en teks onsigbaar. maak dit swart sodat
    dit maklik lees. */
-.sliderbox h1, .sliderbox h2, .sliderbox h3,
-.sliderbox h4, .sliderbox h5, .sliderbox h6,
-.sliderbox p, .sliderbox label {
+.discover-sliderbox-personality h1, .discover-sliderbox-personality h2, .discover-sliderbox-personality h3,
+.discover-sliderbox-personality h4, .discover-sliderbox-personality h5, .discover-sliderbox-personality h6,
+.discover-sliderbox-personality p, .discover-sliderbox-personality label,
+.profile-sliderbox-personality h1, .profile-sliderbox-personality h2, .profile-sliderbox-personality h3,
+.profile-sliderbox-personality h4, .profile-sliderbox-personality h5, .profile-sliderbox-personality h6,
+.profile-sliderbox-personality p, .profile-sliderbox-personality label,
+.match-sliderbox-personality h1, .match-sliderbox-personality h2, .match-sliderbox-personality h3,
+.match-sliderbox-personality h4, .match-sliderbox-personality h5, .match-sliderbox-personality h6,
+.match-sliderbox-personality p, .match-sliderbox-personality label {
     color: #000;
 }
 
 /* gebruik binne die wit sliderbox blokkies (match space, discover kandidaat) */
-.slidertext {
+.discover-slidertext-personality, .match-slidertext-personality {
     color: #000;
     font-size: 0.85rem;
     margin-bottom: 1rem;
 }
 /* gebruik wanneer die intro teks direk op die mauve bigbox agtergrond sit
    (edit profile bladsy) - moet lig wees, nie donker nie, om leesbaar te bly */
-.slidertext2 {
+.profile-slidertext2-personality {
     color: #e9e4f2;
     font-size: 0.85rem;
     margin-bottom: 0.75rem;
 }
-.slider1 { margin-bottom: 1.1rem; }
-.slider1 .labels { display: flex; justify-content: space-between; font-weight: 600; font-size: 0.85rem; color: #000; }
-.slider1 input[type="range"] { width: 100%; accent-color: var(--ink); }
+.discover-slider-introvert-extrovert, .discover-slider-analytical-creative, .discover-slider-tech-savvy, .discover-slider-sporty,
+.profile-slider-introvert-extrovert, .profile-slider-analytical-creative, .profile-slider-tech-savvy, .profile-slider-sporty,
+.match-slider-introvert-extrovert, .match-slider-analytical-creative, .match-slider-tech-savvy, .match-slider-sporty {
+    margin-bottom: 1.1rem;
+}
+.discover-slider-introvert-extrovert-labels, .discover-slider-analytical-creative-labels, .discover-slider-tech-savvy-labels, .discover-slider-sporty-labels,
+.profile-slider-introvert-extrovert-labels, .profile-slider-analytical-creative-labels, .profile-slider-tech-savvy-labels, .profile-slider-sporty-labels,
+.match-slider-introvert-extrovert-labels, .match-slider-analytical-creative-labels, .match-slider-tech-savvy-labels, .match-slider-sporty-labels {
+    display: flex; justify-content: space-between; font-weight: 600; font-size: 0.85rem; color: #000;
+}
+.discover-slider-introvert-extrovert input[type="range"], .discover-slider-analytical-creative input[type="range"], .discover-slider-tech-savvy input[type="range"], .discover-slider-sporty input[type="range"],
+.profile-slider-introvert-extrovert input[type="range"], .profile-slider-analytical-creative input[type="range"], .profile-slider-tech-savvy input[type="range"], .profile-slider-sporty input[type="range"],
+.match-slider-introvert-extrovert input[type="range"], .match-slider-analytical-creative input[type="range"], .match-slider-tech-savvy input[type="range"], .match-slider-sporty input[type="range"] {
+    width: 100%; accent-color: var(--ink);
+}
 
 /* ---------- Public reasons leaderboard ---------- */
-.leaderboardpic {
+.public-reasons-leaderboardpic-top {
     background-size: cover;
     background-position: center;
     padding: 3rem 2.5rem;
     text-align: center;
     color: var(--white);
 }
-.leaderboardpic h1 { color: var(--peach); margin-bottom: 0.5rem; }
-.leaderboardpic p { color: #e9e4f2; max-width: 40rem; margin: 0 auto; }
-.leaderboard1 { background: var(--navy); }
-.leaderboard1 table { margin-bottom: 0; }
-.leaderboard1 thead th {
+.public-reasons-leaderboardpic-top h1 { color: var(--peach); margin-bottom: 0.5rem; }
+.public-reasons-leaderboardpic-top p { color: #e9e4f2; max-width: 40rem; margin: 0 auto; }
+.public-reasons-leaderboard1-main { background: var(--navy); }
+.public-reasons-leaderboard1-main table { margin-bottom: 0; }
+.public-reasons-leaderboard1-main thead th {
     background: var(--peach);
     color: #5c2a1a;
     border: none;
     white-space: nowrap;
 }
-.leaderboard1 tbody tr:nth-child(odd) { background: var(--mauve); color: var(--white); }
-.leaderboard1 tbody tr:nth-child(even) { background: var(--peach); color: #5c2a1a; }
-.leaderboard1 td { vertical-align: middle; }
-.leaderboard1 .avatar { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; background: var(--white); }
+.public-reasons-leaderboard1-main tbody tr:nth-child(odd) { background: var(--mauve); color: var(--white); }
+.public-reasons-leaderboard1-main tbody tr:nth-child(even) { background: var(--peach); color: #5c2a1a; }
+.public-reasons-leaderboard1-main td { vertical-align: middle; }
+.public-reasons-leaderboard1-main .avatar { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; background: var(--white); }
 
 /* ---------- Chat ---------- */
-.chatbox {
+.match-chatbox-window {
     background: var(--white);
     border-radius: 10px;
     height: 340px;
     overflow-y: auto;
     padding: 1rem;
 }
+/* .bubble1 (+ .mine / .theirs) bly 'n gedeelde/dinamiese klas - chat.js skep
+   elke boodskap-borrel programmaties, so dit kan nie 'n vaste per-bladsy naam kry nie. */
 .bubble1 {
     max-width: 75%;
     padding: 0.5rem 0.85rem;
@@ -408,7 +476,10 @@ a:hover { color: var(--cta); }
 .bubble1.mine { background: var(--peach); margin-left: auto; }
 .bubble1.theirs { background: #e9e6f0; margin-right: auto; }
 
-/* ---------- Ander goedjies ---------- */
+/* ---------- Ander goedjies (gedeelde/dinamiese klasse - JS skep hierdie
+   elemente programmaties of hulle herhaal 'n onbekende aantal kere, so
+   hulle kan nie 'n vaste per-bladsy/posisie naam kry sonder om die JS te
+   breek nie) ---------- */
 .appletag {
     display: inline-block;
     border: 1px solid var(--ink);
@@ -469,14 +540,16 @@ a:hover { color: var(--cta); }
     letter-spacing: .03em;
 }
 
-footer.bottomstuff {
+.home-footer-bar-bottom, .discover-footer-bar-bottom, .profile-footer-bar-bottom, .match-footer-bar-bottom, .public_reasons-footer-bar-bottom,
+.login-footer-bar-bottom, .signup-footer-bar-bottom {
     background: #0f1015;
     color: #b9b3c6;
     padding: 2.5rem 1.5rem 1.5rem;
     margin-top: 2rem;
     font-size: 0.85rem;
 }
-.bottomstuffinner {
+.home-footer-inner-bottom, .discover-footer-inner-bottom, .profile-footer-inner-bottom, .match-footer-inner-bottom, .public_reasons-footer-inner-bottom,
+.login-footer-inner-bottom, .signup-footer-inner-bottom {
     max-width: 1100px;
     margin: 0 auto;
     display: flex;
@@ -485,7 +558,8 @@ footer.bottomstuff {
     justify-content: space-between;
     gap: 1rem 2rem;
 }
-.bottomlogo {
+.home-footer-logo-bottom, .discover-footer-logo-bottom, .profile-footer-logo-bottom, .match-footer-logo-bottom, .public_reasons-footer-logo-bottom,
+.login-footer-logo-bottom, .signup-footer-logo-bottom {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -493,19 +567,37 @@ footer.bottomstuff {
     font-size: 1.1rem;
     color: var(--white);
 }
-.bottomlogo img { height: 24px; width: 24px; opacity: 0.9; }
-.bottomlinks { display: flex; gap: 1.25rem; flex-wrap: wrap; }
-.bottomlinks a { color: #cfc9db; }
-.bottomlinks a:hover { color: var(--coral); }
-.bottomnote {
+.home-footer-logo-bottom img, .discover-footer-logo-bottom img, .profile-footer-logo-bottom img, .match-footer-logo-bottom img, .public_reasons-footer-logo-bottom img,
+.login-footer-logo-bottom img, .signup-footer-logo-bottom img {
+    height: 24px; width: 24px; opacity: 0.9;
+}
+.home-footer-links-bottom, .discover-footer-links-bottom, .profile-footer-links-bottom, .match-footer-links-bottom, .public_reasons-footer-links-bottom,
+.login-footer-links-bottom, .signup-footer-links-bottom {
+    display: flex; gap: 1.25rem; flex-wrap: wrap;
+}
+.home-footer-links-bottom a, .discover-footer-links-bottom a, .profile-footer-links-bottom a, .match-footer-links-bottom a, .public_reasons-footer-links-bottom a,
+.login-footer-links-bottom a, .signup-footer-links-bottom a {
+    color: #cfc9db;
+}
+.home-footer-links-bottom a:hover, .discover-footer-links-bottom a:hover, .profile-footer-links-bottom a:hover, .match-footer-links-bottom a:hover, .public_reasons-footer-links-bottom a:hover,
+.login-footer-links-bottom a:hover, .signup-footer-links-bottom a:hover {
+    color: var(--coral);
+}
+.home-footer-note-bottom, .discover-footer-note-bottom, .profile-footer-note-bottom, .match-footer-note-bottom, .public_reasons-footer-note-bottom,
+.login-footer-note-bottom, .signup-footer-note-bottom {
     flex-basis: 100%;
     border-top: 1px solid rgba(255,255,255,.08);
     padding-top: 1rem;
     color: #8d879c;
 }
-.bottomcopy { color: #6f6a80; font-size: 0.78rem; }
+.home-footer-copy-bottom, .discover-footer-copy-bottom, .profile-footer-copy-bottom, .match-footer-copy-bottom, .public_reasons-footer-copy-bottom,
+.login-footer-copy-bottom, .signup-footer-copy-bottom {
+    color: #6f6a80; font-size: 0.78rem;
+}
 
 @media (max-width: 767px) {
-    .authwrap { flex-direction: column; }
-    .pagebox { padding: 1.25rem; }
+    .login-authwrap-main, .signup-authwrap-main { flex-direction: column; }
+    .home-pagebox-undo, .home-pagebox-hero, .home-pagebox-main,
+    .discover-pagebox-main, .profile-pagebox-main, .match-pagebox-main,
+    .unmatch-reason-pagebox-main, .public-reasons-pagebox-main { padding: 1.25rem; }
 }

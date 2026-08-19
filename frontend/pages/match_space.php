@@ -36,11 +36,11 @@ $messages = $msgStmt->fetchAll();
 
 <?php require __DIR__ . '/../../includes/nav.php'; ?>
 
-<div class="pagebox">
+<div class="match-pagebox-main">
     <div class="row g-4">
         <div class="col-lg-4">
-            <div class="photoframe mb-3">
-                <div class="photo-box mb-3">
+            <div class="match-photoframe-left mb-3">
+                <div class="match-photo-box-left mb-3">
                     <img src="<?= e(photo_url($photos[0]['photo_path'] ?? null)) ?>" alt="<?= e($partner['first_name']) ?>">
                 </div>
             </div>
@@ -53,30 +53,30 @@ $messages = $msgStmt->fetchAll();
                 <?php endforeach; ?>
             </div>
 
-            <div class="sliderbox mt-3">
+            <div class="match-sliderbox-personality mt-3">
                 <h3 class="h6 mb-3">Personality / Behaviors</h3>
-                <p class="slidertext">Where <?= e($partner['first_name']) ?> placed themselves on each scale - the closer to an end, the stronger that trait.</p>
-                <div class="slider1">
-                    <div class="labels"><span>Introvert</span><span>Extrovert</span></div>
+                <p class="match-slidertext-personality">Where <?= e($partner['first_name']) ?> placed themselves on each scale - the closer to an end, the stronger that trait.</p>
+                <div class="match-slider-introvert-extrovert">
+                    <div class="match-slider-introvert-extrovert-labels"><span>Introvert</span><span>Extrovert</span></div>
                     <input type="range" min="0" max="100" value="<?= (int) $personality['introvert_extrovert'] ?>" disabled>
                 </div>
-                <div class="slider1">
-                    <div class="labels"><span>Analytical</span><span>Creative</span></div>
+                <div class="match-slider-analytical-creative">
+                    <div class="match-slider-analytical-creative-labels"><span>Analytical</span><span>Creative</span></div>
                     <input type="range" min="0" max="100" value="<?= (int) $personality['analytical_creative'] ?>" disabled>
                 </div>
-                <div class="slider1">
-                    <div class="labels"><span>Tech Savvy</span><span>Not Technical</span></div>
+                <div class="match-slider-tech-savvy">
+                    <div class="match-slider-tech-savvy-labels"><span>Tech Savvy</span><span>Not Technical</span></div>
                     <input type="range" min="0" max="100" value="<?= (int) $personality['tech_savvy'] ?>" disabled>
                 </div>
-                <div class="slider1 mb-0">
-                    <div class="labels"><span>Sporty</span><span>Un-sporty</span></div>
+                <div class="match-slider-sporty mb-0">
+                    <div class="match-slider-sporty-labels"><span>Sporty</span><span>Un-sporty</span></div>
                     <input type="range" min="0" max="100" value="<?= (int) $personality['sporty'] ?>" disabled>
                 </div>
             </div>
         </div>
 
         <div class="col-lg-8">
-            <div class="bigbox">
+            <div class="match-bigbox-right">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 class="h4 mb-0">Your shared space with <?= e($partner['first_name']) ?></h2>
                     <div class="d-flex gap-2 align-items-center">
@@ -84,13 +84,13 @@ $messages = $msgStmt->fetchAll();
                              publieke rede, net sodat dit vinnig is om te herstel terwyl jy
                              vir mense wys hoe die werf werk. die regte "Unmatch" vloei
                              (met die publieke rede) bly dieselfde. -->
-                        <button class="btn outlinebutton2 btn-sm" id="quick-unmatch-btn" title="Demo only - instantly unmatch, no reason needed">Quick unmatch (demo)</button>
-                        <a href="<?= e(base_url('frontend/pages/unmatch_reason.php')) ?>" class="btn pinkbutton btn-sm">Unmatch</a>
+                        <button class="btn match-button-quick-unmatch btn-sm" id="quick-unmatch-btn" title="Demo only - instantly unmatch, no reason needed">Quick unmatch (demo)</button>
+                        <a href="<?= e(base_url('frontend/pages/unmatch_reason.php')) ?>" class="btn match-button-unmatch btn-sm">Unmatch</a>
                     </div>
                 </div>
                 <div id="quick-unmatch-message"></div>
 
-                <div class="chatbox" id="chat-window">
+                <div class="match-chatbox-window" id="chat-window">
                     <?php if (empty($messages)): ?>
                         <p class="text-muted text-center mt-3" id="chat-empty-msg">No messages yet - say hi to <?= e($partner['first_name']) ?>!</p>
                     <?php endif; ?>
@@ -102,8 +102,8 @@ $messages = $msgStmt->fetchAll();
                 </div>
 
                 <form id="chat-form" class="d-flex gap-2 mt-3">
-                    <input type="text" id="chat-input" class="form-control inputbox" placeholder="Say something..." autocomplete="off" required>
-                    <button type="submit" class="btn mainbutton">Send</button>
+                    <input type="text" id="chat-input" class="form-control match-input-chat" placeholder="Say something..." autocomplete="off" required>
+                    <button type="submit" class="btn match-button-send">Send</button>
                 </form>
             </div>
         </div>

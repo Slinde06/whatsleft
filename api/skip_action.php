@@ -4,10 +4,9 @@ require_once __DIR__ . '/../includes/auth.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     json_response(['success' => false, 'error' => 'Invalid request method.'], 405);
 }
-if ($currentUser['skip_used']) {
-    json_response(['success' => false, 'error' => 'You have already used your one skip, ever.'], 422);
-}
 
+// Die eerste keer is die amptelike "1-time skip". Daarna neem die Dislike-knoppie (nou "Skip") oor
+// sonder 'n rede nodig - skip_used bly gewoon 1, dit word nie weer geblokkeer nie.
 $input = json_decode(file_get_contents('php://input'), true) ?? $_POST;
 $targetId = (int) ($input['target_id'] ?? 0);
 

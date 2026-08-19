@@ -12,6 +12,7 @@ if (!empty($_SESSION['user_id']) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
     unset($_SESSION['user_id']);
 }
 
+$activePage = 'signup';
 $errors = [];
 $old = ['first_name' => '', 'last_name' => '', 'email' => '', 'dob' => '', 'looking_for' => ''];
 
@@ -85,13 +86,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-<nav class="topbar">
-    <a href="<?= e(base_url('frontend/pages/login.php')) ?>" class="logostuff">
+<nav class="signup-nav-bar-top">
+    <a href="<?= e(base_url('frontend/pages/login.php')) ?>" class="signup-nav-logo-top">
         <img src="<?= e(base_url('frontend/assets/images/logo.svg')) ?>" alt="What's Left logo">
         What&rsquo;s Left
     </a>
     <div>
-        <a href="<?= e(base_url('frontend/pages/login.php')) ?>">Login</a>
+        <a href="<?= e(base_url('frontend/pages/login.php')) ?>" class="signup-nav-login-link-top">Login</a>
     </div>
 </nav>
 
@@ -108,20 +109,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 -->
 
-<div class="authwrap">
-    <div class="authside" style="background-image: linear-gradient(180deg, rgba(50,93,128,.55), rgba(50,93,128,.88)), url('<?= e(base_url('frontend/assets/images/brooke-cagle-oTweoxMKdkA-unsplash.jpg')) ?>');">
+<div class="signup-authwrap-main">
+    <div class="signup-authside-main" style="background-image: linear-gradient(180deg, rgba(50,93,128,.55), rgba(50,93,128,.88)), url('<?= e(base_url('frontend/assets/images/brooke-cagle-oTweoxMKdkA-unsplash.jpg')) ?>');">
         <blockquote>
             &ldquo;Every choice you make here is permanent and public. Read the rules before you join.&rdquo;
         </blockquote>
         <p>What&rsquo;s Left</p>
     </div>
 
-    <div class="authform">
-    <div class="authcard" style="max-width: 42rem;">
+    <div class="signup-authform-main">
+    <div class="signup-authcard-main" style="max-width: 42rem;">
         <div class="text-center">
-            <div class="tinytext">Join What&rsquo;s Left</div>
+            <div class="signup-tinytext-top">Join What&rsquo;s Left</div>
             <h1>Create your account</h1>
-            <p class="subtitle">Read carefully.</p>
+            <p class="signup-subtitle-tagline">Read carefully.</p>
         </div>
 
         <?php foreach ($errors as $err): ?>
@@ -132,23 +133,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="row g-3">
                 <div class="col-md-6">
                     <label for="first_name">First Name:</label>
-                    <input type="text" class="form-control inputbox" id="first_name" name="first_name" placeholder="Sam" value="<?= e($old['first_name']) ?>" required>
+                    <input type="text" class="form-control signup-input-first-name" id="first_name" name="first_name" placeholder="Sam" value="<?= e($old['first_name']) ?>" required>
                 </div>
                 <div class="col-md-6">
                     <label for="last_name">Last Name:</label>
-                    <input type="text" class="form-control inputbox" id="last_name" name="last_name" placeholder="Williams" value="<?= e($old['last_name']) ?>" required>
+                    <input type="text" class="form-control signup-input-last-name" id="last_name" name="last_name" placeholder="Williams" value="<?= e($old['last_name']) ?>" required>
                 </div>
                 <div class="col-12">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control inputbox" id="email" name="email" placeholder="exsample@gmail.com" value="<?= e($old['email']) ?>" required>
+                    <input type="email" class="form-control signup-input-email" id="email" name="email" placeholder="exsample@gmail.com" value="<?= e($old['email']) ?>" required>
                 </div>
                 <div class="col-md-6">
                     <label for="dob">Date of birth:</label>
-                    <input type="date" class="form-control inputbox" id="dob" name="dob" value="<?= e($old['dob']) ?>" required>
+                    <input type="date" class="form-control signup-input-dob" id="dob" name="dob" value="<?= e($old['dob']) ?>" required>
                 </div>
                 <div class="col-md-6">
                     <label for="looking_for">Looking for:</label>
-                    <select class="form-control inputbox" id="looking_for" name="looking_for" required>
+                    <select class="form-control signup-input-looking-for" id="looking_for" name="looking_for" required>
                         <option value="" disabled <?= $old['looking_for'] === '' ? 'selected' : '' ?>>Select&hellip;</option>
                         <option value="Male" <?= $old['looking_for'] === 'Male' ? 'selected' : '' ?>>Male</option>
                         <option value="Female" <?= $old['looking_for'] === 'Female' ? 'selected' : '' ?>>Female</option>
@@ -157,16 +158,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="col-md-6">
                     <label for="password">Password:</label>
-                    <input type="password" class="form-control inputbox" id="password" name="password" placeholder="At least 8 characters" required>
+                    <input type="password" class="form-control signup-input-password" id="password" name="password" placeholder="At least 8 characters" required>
                 </div>
                 <div class="col-md-6">
                     <label for="confirm_password">Confirm Password:</label>
-                    <input type="password" class="form-control inputbox" id="confirm_password" name="confirm_password" placeholder="Repeat password" required>
+                    <input type="password" class="form-control signup-input-confirm-password" id="confirm_password" name="confirm_password" placeholder="Repeat password" required>
                 </div>
             </div>
 
-            <div class="rulesbox mt-4">
-                <div class="rulestitle">BEFORE YOU JOIN - THE VERDICT POLICY</div>
+            <div class="signup-rulesbox-main mt-4">
+                <div class="signup-rulesbox-title">BEFORE YOU JOIN - THE VERDICT POLICY</div>
                 <ul>
                     <li>You may skip exactly one profile, ever.</li>
                     <li>You get exactly one undo, ever - spend it wisely.</li>
@@ -182,9 +183,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
-            <button type="submit" class="btn mainbutton w-100 mt-4">Create Account</button>
-            <div class="text-center my-3 subtitle">OR</div>
-            <p class="text-center subtitle">
+            <button type="submit" class="btn signup-button-submit-main w-100 mt-4">Create Account</button>
+            <div class="text-center my-3 signup-subtitle-or">OR</div>
+            <p class="text-center signup-subtitle-login-prompt">
                 Already have an account?
                 <a href="<?= e(base_url('frontend/pages/login.php')) ?>">Log in</a>
             </p>

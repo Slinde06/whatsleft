@@ -5,6 +5,8 @@
 (function () {
     const base = window.WL.baseUrl;
     let currentCandidateId = null;
+    let skipUsedFlag = false;
+    let repeatSkipMode = false;
 
     const loadingState   = document.getElementById('loading-state');
     const noMoreState    = document.getElementById('no-more-state');
@@ -12,6 +14,9 @@
     const skipBadge      = document.getElementById('skip-badge');
     const actionMessage  = document.getElementById('action-message');
     const skipBtn        = document.getElementById('skip-btn');
+    const nextBtn        = document.getElementById('next-btn');
+    const likeBtn        = document.getElementById('like-btn');
+    const dislikeBtn     = document.getElementById('dislike-btn');
 
     function showState(name) {
         loadingState.style.display = name === 'loading' ? '' : 'none';
@@ -57,8 +62,31 @@
                     showState('none');
                 } else {
                     renderCandidate(data.candidate);
-                    skipBtn.disabled = !!data.skip_used;
-                    skipBtn.textContent = data.skip_used ? 'Skip already used' : 'Next (use 1-time skip)';
+
+                    const alreadyDecided = !!data.candidate.already_decided;
+                    skipUsedFlag = !!data.skip_used;
+                    repeatSkipMode = alreadyDecided && data.candidate.previous_action === 'skip';
+
+                    if (repeatSkipMode) {
+                        likeBtn.style.display = 'none';
+                        dislikeBtn.style.display = '';
+                        dislikeBtn.textContent = 'Skip';
+                        skipBtn.style.display = 'none';
+                        nextBtn.style.display = 'none';
+                    } else if (alreadyDecided) {
+                        likeBtn.style.display = 'none';
+                        dislikeBtn.style.display = 'none';
+                        skipBtn.style.display = 'none';
+                        nextBtn.style.display = '';
+                    } else {
+                        likeBtn.style.display = '';
+                        dislikeBtn.style.display = '';
+                        nextBtn.style.display = 'none';
+                        skipBtn.style.display = skipUsedFlag ? 'none' : '';
+                        skipBtn.disabled = false;
+                        skipBtn.textContent = 'Next (use 1-time skip)';
+                        dislikeBtn.textContent = skipUsedFlag ? 'Skip' : 'Dislike';
+                    }
                     showState('candidate');
                 }
             })
@@ -107,6 +135,32 @@
     const dislikeModal = new bootstrap.Modal(dislikeModalEl);
 
     document.getElementById('dislike-btn').addEventListener('click', function () {
+        if (!currentCandidateId) return;
+
+        if (repeatSkipMode) {
+            // Reeds op hierdie persoon geskip - moenie weer 'n swipe-ry probeer maak nie, gaan net aan.
+            loadNext();
+            return;
+        }
+
+        if (skipUsedFlag) {
+            // Skip is al gebruik - Dislike-knoppie tree nou op as 'n vinnige skip, geen rede nodig nie.
+            fetch(base + 'api/skip_action.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ target_id: currentCandidateId })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    loadNext();
+                } else {
+                    actionMessage.innerHTML = '<div class="uhohbox">' + (data.error || 'Could not skip.') + '</div>';
+                }
+            });
+            return;
+        }
+
         document.getElementById('reason-short').value = '';
         document.getElementById('reason-long').value = '';
         document.getElementById('reason-error').style.display = 'none';
@@ -139,6 +193,10 @@
                 errorBox.style.display = '';
             }
         });
+    });
+
+    nextBtn.addEventListener('click', function () {
+        loadNext();
     });
 
     loadNext();

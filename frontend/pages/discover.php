@@ -20,7 +20,7 @@ if (!empty($currentUser['is_matched']) && !empty($currentUser['current_match_id'
 
 <?php require __DIR__ . '/../../includes/nav.php'; ?>
 
-<div class="pagebox" id="discover-app">
+<div class="discover-pagebox-main" id="discover-app">
 
     <div id="skip-badge" class="text-center mb-3 fw-bold" style="color:var(--peach); display:none;">
         1 SKIP REMAINING
@@ -28,49 +28,49 @@ if (!empty($currentUser['is_matched']) && !empty($currentUser['current_match_id'
 
     <div id="loading-state" class="text-center text-white py-5">Loading the next profile&hellip;</div>
 
-    <div id="no-more-state" class="bigbox text-center py-5" style="display:none;">
+    <div id="no-more-state" class="discover-bigbox-nomore text-center py-5" style="display:none;">
         <h2>That&rsquo;s everyone.</h2>
         <p>There&rsquo;s no one left to discover right now - check back later.</p>
-        <a href="<?= e(base_url('frontend/pages/home.php')) ?>" class="btn outlinebutton">Back to Home</a>
+        <a href="<?= e(base_url('frontend/pages/home.php')) ?>" class="btn discover-button-back-home">Back to Home</a>
     </div>
 
     <div class="row g-4" id="candidate-state" style="display:none;">
         <div class="col-lg-4">
-            <div class="photoframe">
-                <div class="photo-box mb-3">
+            <div class="discover-photoframe-left">
+                <div class="discover-photo-box-left mb-3">
                     <img id="c-photo" src="" alt="Candidate photo">
                 </div>
                 <div class="d-flex gap-2">
-                    <button class="btn pinkbutton flex-fill" id="dislike-btn">Dislike</button>
-                    <button class="btn mainbutton flex-fill" id="like-btn">Like</button>
+                    <button class="btn discover-button-dislike flex-fill" id="dislike-btn">Dislike</button>
+                    <button class="btn discover-button-like flex-fill" id="like-btn">Like</button>
                 </div>
             </div>
         </div>
 
         <div class="col-lg-5">
-            <div class="bigbox">
+            <div class="discover-bigbox-middle">
                 <h1 id="c-name" class="h2"></h1>
                 <p id="c-location" class="mb-3"></p>
                 <p id="c-description"></p>
                 <div id="c-hobbies" class="mb-3"></div>
 
-                <div class="sliderbox">
+                <div class="discover-sliderbox-personality">
                     <h3 class="h6 mb-3">Personality / Behaviors</h3>
-                    <p class="slidertext">How this person placed themselves on each scale.</p>
-                    <div class="slider1">
-                        <div class="labels"><span>Introvert</span><span>Extrovert</span></div>
+                    <p class="discover-slidertext-personality">How this person placed themselves on each scale.</p>
+                    <div class="discover-slider-introvert-extrovert">
+                        <div class="discover-slider-introvert-extrovert-labels"><span>Introvert</span><span>Extrovert</span></div>
                         <input type="range" min="0" max="100" id="p-ie" disabled>
                     </div>
-                    <div class="slider1">
-                        <div class="labels"><span>Analytical</span><span>Creative</span></div>
+                    <div class="discover-slider-analytical-creative">
+                        <div class="discover-slider-analytical-creative-labels"><span>Analytical</span><span>Creative</span></div>
                         <input type="range" min="0" max="100" id="p-ac" disabled>
                     </div>
-                    <div class="slider1">
-                        <div class="labels"><span>Tech Savvy</span><span>Not Technical</span></div>
+                    <div class="discover-slider-tech-savvy">
+                        <div class="discover-slider-tech-savvy-labels"><span>Tech Savvy</span><span>Not Technical</span></div>
                         <input type="range" min="0" max="100" id="p-ts" disabled>
                     </div>
-                    <div class="slider1 mb-0">
-                        <div class="labels"><span>Sporty</span><span>Un-sporty</span></div>
+                    <div class="discover-slider-sporty mb-0">
+                        <div class="discover-slider-sporty-labels"><span>Sporty</span><span>Un-sporty</span></div>
                         <input type="range" min="0" max="100" id="p-sp" disabled>
                     </div>
                 </div>
@@ -78,15 +78,16 @@ if (!empty($currentUser['is_matched']) && !empty($currentUser['current_match_id'
         </div>
 
         <div class="col-lg-3">
-            <div class="rulesbox mb-3">
-                <div class="rulestitle">BEFORE YOU DECIDE</div>
+            <div class="discover-rulesbox-right mb-3">
+                <div class="discover-rulesbox-title">BEFORE YOU DECIDE</div>
                 <ul>
-                    <li>You may skip exactly one profile, ever.</li>
-                    <li>Passing (Dislike) requires a public, detailed reason.</li>
+                    <li>You may skip exactly one profile with no reason, ever - after that, Dislike itself becomes a quick skip.</li>
+                    <li>Passing (Dislike) requires a public, detailed reason until your one skip is used.</li>
                     <li>Matching moves you to a shared space - you can&rsquo;t browse again unless it ends.</li>
                 </ul>
             </div>
-            <button class="btn outlinebutton w-100" id="skip-btn">Next (use 1-time skip)</button>
+            <button class="btn discover-button-skip w-100" id="skip-btn">Next (use 1-time skip)</button>
+            <button class="btn discover-button-skip w-100" id="next-btn" style="display:none;">Next</button>
             <div id="action-message" class="mt-3"></div>
         </div>
     </div>
@@ -115,8 +116,8 @@ if (!empty($currentUser['is_matched']) && !empty($currentUser['current_match_id'
         <div class="uhohbox" id="reason-error" style="display:none;"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn pinkbutton" data-bs-dismiss="modal">Back</button>
-        <button type="button" class="btn mainbutton" id="confirm-dislike-btn">Save and pass</button>
+        <button type="button" class="btn discover-modal-button-back" data-bs-dismiss="modal">Back</button>
+        <button type="button" class="btn discover-modal-button-confirm" id="confirm-dislike-btn">Save and pass</button>
       </div>
     </div>
   </div>
