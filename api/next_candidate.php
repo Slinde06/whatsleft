@@ -66,6 +66,7 @@ json_response([
         'description' => $candidate['description'],
         'hobbies'     => $hobbies,
         'photo_url'   => photo_url($photos[0]['photo_path'] ?? null),
+        'photo_urls'  => array_map(fn($p) => photo_url($p['photo_path']), $photos) ?: [photo_url(null)],
         'personality' => [
             'introvert_extrovert' => (int) $personality['introvert_extrovert'],
             'analytical_creative' => (int) $personality['analytical_creative'],

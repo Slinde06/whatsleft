@@ -37,8 +37,10 @@ if (!empty($currentUser['is_matched']) && !empty($currentUser['current_match_id'
     <div class="row g-4" id="candidate-state" style="display:none;">
         <div class="col-lg-4">
             <div class="discover-photoframe-left">
-                <div class="discover-photo-box-left mb-3">
+                <div class="discover-photo-box-left mb-3 position-relative">
                     <img id="c-photo" src="" alt="Candidate photo">
+                    <button type="button" class="discover-photo-nav discover-photo-nav-prev" id="photo-prev-btn" style="display:none;" aria-label="Previous photo">&#10094;</button>
+                    <button type="button" class="discover-photo-nav discover-photo-nav-next" id="photo-next-btn" style="display:none;" aria-label="Next photo">&#10095;</button>
                 </div>
                 <div class="d-flex gap-2">
                     <button class="btn discover-button-dislike flex-fill" id="dislike-btn">Dislike</button>

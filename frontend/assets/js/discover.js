@@ -8,6 +8,8 @@
     let skipUsedFlag = false;
     let repeatSkipMode = false;
     let dislikeUndoUsedFlag = false;      // has the 1-time "go back" already been spent?
+    let currentPhotos = [];
+    let currentPhotoIndex = 0;
 
     const loadingState   = document.getElementById('loading-state');
     const noMoreState    = document.getElementById('no-more-state');
@@ -19,6 +21,20 @@
     const likeBtn        = document.getElementById('like-btn');
     const dislikeBtn     = document.getElementById('dislike-btn');
     const rewindBtn      = document.getElementById('rewind-btn');
+    const photoPrevBtn   = document.getElementById('photo-prev-btn');
+    const photoNextBtn   = document.getElementById('photo-next-btn');
+
+    function showPhoto(index) {
+        if (!currentPhotos.length) return;
+        currentPhotoIndex = (index + currentPhotos.length) % currentPhotos.length;
+        document.getElementById('c-photo').src = currentPhotos[currentPhotoIndex];
+        const showNav = currentPhotos.length > 1;
+        photoPrevBtn.style.display = showNav ? '' : 'none';
+        photoNextBtn.style.display = showNav ? '' : 'none';
+    }
+
+    photoPrevBtn.addEventListener('click', function () { showPhoto(currentPhotoIndex - 1); });
+    photoNextBtn.addEventListener('click', function () { showPhoto(currentPhotoIndex + 1); });
 
     function showState(name) {
         loadingState.style.display = name === 'loading' ? '' : 'none';
@@ -28,7 +44,8 @@
 
     function renderCandidate(c) {
         currentCandidateId = c.id;
-        document.getElementById('c-photo').src = c.photo_url;
+        currentPhotos = (c.photo_urls && c.photo_urls.length) ? c.photo_urls : [c.photo_url];
+        showPhoto(0);
         document.getElementById('c-name').textContent = c.first_name + (c.age ? ', ' + c.age : '');
         document.getElementById('c-location').textContent = c.location || '';
         document.getElementById('c-description').textContent = c.description || '';
