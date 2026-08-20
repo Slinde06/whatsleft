@@ -236,7 +236,7 @@ erDiagram
 
 ## Final Outcome
 
-![Discover screen](readmeimgs/MacBook%20#13.jpg)
+![Discover screen](readmeimgs/mockup.jpg)
 
 ### Video Demonstration
 
