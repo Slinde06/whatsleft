@@ -240,7 +240,7 @@ erDiagram
 
 ### Video Demonstration
 
-> Add your public YouTube/Drive link here before submitting.
+[Google Drive Folder](https://drive.google.com/drive/folders/1CUNbZi8QQkNRmrcEAfAWiJvKHvl3uies?usp=sharing)
 
 ## Security Notes
 
