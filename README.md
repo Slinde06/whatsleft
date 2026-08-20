@@ -145,7 +145,7 @@ A single lifetime undo that can restore your most recently ended dislike.
 
 ### Entity-Relationship Diagram
 
-```mermaid
+```
 erDiagram
   USERS ||--o{ USER_PHOTOS : has
   USERS ||--o{ USER_HOBBIES : has
