@@ -3,7 +3,7 @@
  * config/db.php
  * Begin die sessie en maak 'n PDO-verbinding met MySQL oop.
  * Word deur elke bladsy/api endpoint ingesluit via includes/auth.php of direk.
- * (het die sessie/login idee hier gekry: https://www.youtube.com/watch?v=-rMq6PVCd0k)
+ * (het die sessie/login idee hier gekry:                                                               https://www.youtube.com/watch?v=-rMq6PVCd0k)
  */
 
 if (session_status() === PHP_SESSION_NONE) {

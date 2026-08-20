@@ -23,3 +23,6 @@ if (!$currentUser) {
     session_destroy();
     redirect(base_url('frontend/pages/login.php'));
 }
+
+
+//                                                                                       so basicaly wat hier gebeur is hy kyk of die persoon in gelog is 
