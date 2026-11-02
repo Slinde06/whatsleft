@@ -1,16 +1,26 @@
-##### Shaun Linde
+<p align="center">
+  <img src="frontend/assets/images/logo.svg" width="110" alt="What's Left logo" />
+</p>
 
-##### 251208
+<h1 align="center">What's Left</h1>
 
-###### DV200 – SQL and PHP Development, Semester 2
+<p align="center">
+  <b>Dating web app (PHP + MySQL)</b> · Built by <a href="https://github.com/Slinde06">Shaun Linde</a> (251208)<br/>
+  A dating web app with a twist: every decision is permanent and public.
+</p>
 
-### What's Left
+<p align="center">
+  <img src="https://img.shields.io/badge/PHP-777BB4?style=flat&logo=php&logoColor=white" />
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat&logo=bootstrap&logoColor=white" />
+  <img src="https://img.shields.io/badge/XAMPP-FB7A24?style=flat&logo=xampp&logoColor=white" />
+</p>
 
-A dating web app with a twist: every decision is permanent and public.
-
-[**Explore the docs »**](#getting-started-xampp)
-
-[View Demo](#-add-your-public-youtubedrive-link-here-before-submitting) · [Report Bug](../../issues) · [Request Feature](../../issues)
+<p align="center">
+  <a href="#getting-started"><b>Explore the docs »</b></a> ·
+  <a href="#video-demonstration">View Demo</a> ·
+  <a href="../../issues">Report Bug</a>
+</p>
 
 ## Table of Contents
 
@@ -28,16 +38,14 @@ A dating web app with a twist: every decision is permanent and public.
   * [Implementation Process](#implementation-process)
     + [Highlights](#highlights)
     + [Challenges](#challenges)
-  * [Reviews and Testing](#reviews-and-testing)
-    + [Feedback from Reviews](#feedback-from-reviews)
-    + [Unit Tests](#unit-tests)
+  * [Testing](#testing)
   * [Future Implementation](#future-implementation)
 - [Final Outcome](#final-outcome)
   * [Video Demonstration](#video-demonstration)
 - [Security Notes](#security-notes)
 - [Known Limitations](#known-limitations)
 - [Project Structure](#project-structure)
-- [Roadmap](#roadmap)
+- [Conclusion](#conclusion)
 - [License](#license)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
@@ -48,17 +56,17 @@ A dating web app with a twist: every decision is permanent and public.
 
 ### Project Description
 
-**What's Left** is a dating web app with one rule that changes everything: every swipe is permanent and public. There's no infinite scroll of matches to reconsider — you get one lifetime "undo" to restore your most recent ended match, one lifetime skip on the discover deck, and every dislike or unmatch has to come with a reason that gets published on a public leaderboard for everyone to see.
+**What's Left** is a dating web app with one rule that changes everything: every swipe is permanent and public. There's no infinite scroll of matches to reconsider you get one lifetime "undo" to restore your most recent ended match, one lifetime skip on the discover deck, and every dislike or unmatch has to come with a reason that gets published on a public leaderboard for everyone to see.
 
 Built for **DV200 (Semester 2 – SQL and PHP Development)**, the project's real focus is under the hood: session-based authentication, full CRUD across a relational schema, and a public leaderboard powered by a SQL view built from correlated subqueries.
 
 ### Built With
 
-- [PHP 8](https://www.php.net/) — vanilla PHP + PDO, no framework
-- [MySQL / MariaDB](https://www.mysql.com/) — relational database, prepared statements throughout
-- [Apache](https://httpd.apache.org/) (via XAMPP) — web server
-- [Bootstrap 5.3](https://getbootstrap.com/) — layout and components
-- Vanilla JavaScript (`fetch`) — discover, chat, and profile interactions
+- [PHP 8](https://www.php.net/)  vanilla PHP + PDO, no framework
+- [MySQL / MariaDB](https://www.mysql.com/)  relational database, prepared statements throughout
+- [Apache](https://httpd.apache.org/) (via XAMPP)  web server
+- [Bootstrap 5.3](https://getbootstrap.com/)  layout and components
+- Vanilla JavaScript (`fetch`)  discover, chat, and profile interactions
 
 ## Getting Started
 
@@ -73,7 +81,7 @@ Ensure you have [XAMPP](https://www.apachefriends.org/) installed, with Apache a
 1. **Clone** this repo into your XAMPP `htdocs` folder:
 
    ```
-   git clone https://github.com/Slinde06/https://github.com/Armand-OW/portfolioTemplate-OW.git
+   git clone https://github.com/Slinde06/whatsleft.git
    ```
 
    (or place it directly at `htdocs/whatsleft`)
@@ -88,9 +96,9 @@ Ensure you have [XAMPP](https://www.apachefriends.org/) installed, with Apache a
      ```
    - This creates the `whats_left` database, all tables, the `leaderboard_view`, and seeds 24 demo members.
 
-4. **Check the config** — `config/db.php` already points at `localhost` / `whats_left` / user `root` with no password (XAMPP defaults). Update `$DB_USER` / `$DB_PASS` if your setup differs.
+4. **Check the config**  `config/db.php` already points at `localhost` / `whats_left` / user `root` with no password (XAMPP defaults). Update `$DB_USER` / `$DB_PASS` if your setup differs.
 
-5. **Visit** `http://localhost/whats-left/` in your browser. Make sure `uploads/profile_photos/` stays writable by the web server, since uploaded profile photos are served from there.
+5. **Visit** `http://localhost/whatsleft/` in your browser. Make sure `uploads/profile_photos/` stays writable by the web server, since uploaded profile photos are served from there.
 
 ### Demo Data & Login
 
@@ -103,7 +111,7 @@ The SQL import seeds 24 members (matching the sample photos committed under `upl
 | General like/dislike activity | Also on *Public reasons* |
 
 **Every seeded account uses the same demo password:** `12345678`
-(Any seeded email works — see the `users` table for the full list.)
+(Any seeded email works see the `users` table for the full list.)
 
 ## Features and Functionality
 
@@ -129,13 +137,13 @@ A mutual like immediately creates a match and moves both users into a shared Mat
 
 ### Public Reasons Leaderboard
 
-A public page listing every member's like/dislike/unmatch counts and their most recent unmatch reason — powered by a SQL **view** built from **correlated subqueries** (`leaderboard_view`).
+A public page listing every member's like/dislike/unmatch counts and their most recent unmatch reason powered by a SQL **view** built from **correlated subqueries** (`leaderboard_view`).
 
 ![Discover screen](readmeimgs/Screenshot%202026-08-20%20112754.png)
 
 ### Profile Management
 
-Up to 6 photos, hobbies (tag input), a 4-axis personality slider set, and bio/location/contact details — all editable and saved via `api/update_profile.php`.
+Up to 6 photos, hobbies (tag input), a 4-axis personality slider set, and bio/location/contact details all editable and saved via `api/update_profile.php`.
 
 ### One-Time Undo
 
@@ -218,20 +226,37 @@ erDiagram
   }
 ```
 
-*(GitHub renders the diagram above automatically. A `leaderboard_view` SQL view — not shown as an entity — sits on top of `users`, `swipes` and `matches` using correlated subqueries; see `database/whats_left.sql`.)*
+*(GitHub renders the diagram above automatically. A `leaderboard_view` SQL view — not shown as an entity sits on top of `users`, `swipes` and `matches` using correlated subqueries; see `database/whats_left.sql`.)*
 
 ## Development Process
 
 ### Implementation Process
 
-- Vanilla PHP + PDO throughout — no framework — to keep the SQL and server-side logic explicit for the DV200 brief.
+- Vanilla PHP + PDO throughout no framework to keep the SQL and server-side logic explicit for the DV200 brief.
 - Session-based auth guard shared across every protected page and API endpoint.
 - Public leaderboard driven by a SQL view using correlated subqueries rather than application-side aggregation.
 - Short-poll `fetch` used for chat to simulate realtime behaviour without a websocket server.
 
+#### Highlights
+
+- The **one-time undo and skip** rules are enforced in the database, not just hidden in the UI, so they can't be bypassed by refreshing the page.
+- The **public reasons leaderboard** is a single SQL view, so the page stays simple and the logic lives in one place.
+
+#### Challenges
+
+<!-- TODO: check these match what really happened and rewrite in your own words -->
+- **Skip button bug:** the skip button kept breaking the Discover deck. I removed the faulty version, rebuilt the action as its own API endpoint (`api/skip_action.php`), and the buttons finally worked.
+- **Images not showing:** uploaded and seeded profile photos wouldn't display at first because of wrong file paths. I fixed it with a shared `photo_url()` helper so every page builds the path the same way.
+
+### Testing
+
+- Manually tested every flow (sign up, log in, like, dislike with reason, match, chat, unmatch, undo, skip, edit profile, upload/delete photo) with several seeded accounts.
+- Tested protected pages and API routes while logged out to confirm they redirect or return a `401`.
+- Tried SQL characters (`'`, `"`, `<script>`) in forms and chat to check prepared statements and output escaping.
+
 ### Future Implementation
 
-- Admin/moderation role — currently all posts are auto-approved.
+- Admin/moderation role currently all posts are auto-approved.
 - A real recommendation algorithm for Discover pagination, replacing the current round-robin cursor.
 
 ## Final Outcome
@@ -242,16 +267,21 @@ erDiagram
 
 [Google Drive Folder](https://drive.google.com/drive/folders/1CUNbZi8QQkNRmrcEAfAWiJvKHvl3uies?usp=sharing)
 
+## Conclusion
+
+<!-- TODO: put this in your own words -->
+What's Left taught me how much a relational database can do on its own: views, constraints and prepared statements replaced a lot of PHP code I would otherwise have written. The hardest part was making the "permanent" rules really permanent, because every action had to be checked on the server. Next, I'd add an admin moderation role, a smarter Discover algorithm and automated tests.
+
 ## Security Notes
 
-- All queries use PDO prepared statements (`PDO::ATTR_EMULATE_PREPARES => false`) — no raw string-built SQL anywhere in the codebase.
-- Passwords are hashed with `password_hash()` / verified with `password_verify()` — never stored or logged in plain text.
+- All queries use PDO prepared statements (`PDO::ATTR_EMULATE_PREPARES => false`) no raw string-built SQL anywhere in the codebase.
+- Passwords are hashed with `password_hash()` / verified with `password_verify()` never stored or logged in plain text.
 - All output is escaped through the `e()` helper (`htmlspecialchars`) before being echoed into HTML, mitigating XSS.
 - Session-based auth guard on every protected page and API route; API routes return JSON 401s instead of redirecting.
 
 ## Known Limitations
 
-- No admin/moderation role yet — all posts are auto-approved.
+- No admin/moderation role yet all posts are auto-approved.
 - Discover pagination is a simple round-robin cursor, not a recommendation algorithm.
 - No automated tests yet.
 
@@ -275,15 +305,12 @@ whats-left/
 └── index.php                  # Redirects to home/login
 ```
 
+## License
+
+Distributed under the MIT License.
+
 ## Contact
 
-- **Your Name & Surname** — <email@address> — [@instagram_handle](https://www.instagram.com/instagram_handle/)
-- **Project Link** — <https://github.com/Slinde06/whatsleft>
+- **Shaun Linde**: [shaunlinde1000@gmail.com](mailto:251208@gmail.com) · [GitHub](https://github.com/Slinde06)
+- **Project Link**: <https://github.com/Slinde06/whatsleft>
 
-## Acknowledgements
-
-- Session/login pattern adapted from: [YouTube](https://www.youtube.com/watch?v=-rMq6PVCd0k)
-- Short-poll chat pattern adapted from: [YouTube](https://www.youtube.com/watch?v=57Y9qOj47A4)
-- [Bootstrap 5.3](https://getbootstrap.com/) (via CDN) for layout/components
-- Google Fonts — Poppins & Poly
-- Demo profile photos: Unsplash contributors ayo-ogunseinde, brooke-cagle, christina-wocintechchat-com, ivana-cajina, jeffery-erhunse, joseph-gonzalez, linkedin-sales-solutions, priscilla-du-preez, stefan-stefancik, toa-heftiba
