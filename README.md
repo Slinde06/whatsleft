@@ -225,7 +225,7 @@ erDiagram
   }
 ```
 
-*(GitHub renders the diagram above automatically. A `leaderboard_view` SQL view — not shown as an entity sits on top of `users`, `swipes` and `matches` using correlated subqueries; see `database/whats_left.sql`.)*
+*(GitHub renders the diagram above automatically. A `leaderboard_view` SQL view   not shown as an entity sits on top of `users`, `swipes` and `matches` using correlated subqueries; see `database/whats_left.sql`.)*
 
 ## Development Process
 
