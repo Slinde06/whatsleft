@@ -304,6 +304,6 @@ whats-left/
 
 ## Contact
 
-- **Shaun Linde**: [251208@virtualwindow.co.za](mailto:251208@virtualwindow.co.za) · [GitHub](https://github.com/Slinde06)
+- **Shaun Linde**: · [251208@virtualwindow.co.za](mailto:251208@virtualwindow.co.za) · [GitHub](https://github.com/Slinde06)
 - **Project Link**: <https://github.com/Slinde06/whatsleft>
 
