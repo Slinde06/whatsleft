@@ -56,17 +56,17 @@
 
 ### Project Description
 
-**What's Left** is a dating web app with one rule that changes everything: every swipe is permanent and public. There's no infinite scroll of matches to reconsider you get one lifetime "undo" to restore your most recent ended match, one lifetime skip on the discover deck, and every dislike or unmatch has to come with a reason that gets published on a public leaderboard for everyone to see.
+**What's Left** is a dating web app with one rule that changes everything: every swipe is permanent and public. There's no infinite scroll of matches to reconsider: you get one lifetime "undo" to restore your most recent ended match, one lifetime skip on the discover deck, and every dislike or unmatch has to come with a reason that gets published on a public leaderboard for everyone to see.
 
 Built for **DV200 (Semester 2 – SQL and PHP Development)**, the project's real focus is under the hood: session-based authentication, full CRUD across a relational schema, and a public leaderboard powered by a SQL view built from correlated subqueries.
 
 ### Built With
 
-- [PHP 8](https://www.php.net/)  vanilla PHP + PDO, no framework
-- [MySQL / MariaDB](https://www.mysql.com/)  relational database, prepared statements throughout
-- [Apache](https://httpd.apache.org/) (via XAMPP)  web server
-- [Bootstrap 5.3](https://getbootstrap.com/)  layout and components
-- Vanilla JavaScript (`fetch`)  discover, chat, and profile interactions
+- [PHP 8](https://www.php.net/): vanilla PHP + PDO, no framework
+- [MySQL / MariaDB](https://www.mysql.com/): relational database, prepared statements throughout
+- [Apache](https://httpd.apache.org/) (via XAMPP):  web server
+- [Bootstrap 5.3](https://getbootstrap.com/):  layout and components
+- Vanilla JavaScript (`fetch`):  discover, chat, and profile interactions
 
 ## Getting Started
 
@@ -193,7 +193,6 @@ erDiagram
     varchar hobby
   }
   USER_PERSONALITY {
-    int user_id PK_FK
     tinyint introvert_extrovert
     tinyint analytical_creative
     tinyint tech_savvy
@@ -244,7 +243,6 @@ erDiagram
 
 #### Challenges
 
-<!-- TODO: check these match what really happened and rewrite in your own words -->
 - **Skip button bug:** the skip button kept breaking the Discover deck. I removed the faulty version, rebuilt the action as its own API endpoint (`api/skip_action.php`), and the buttons finally worked.
 - **Images not showing:** uploaded and seeded profile photos wouldn't display at first because of wrong file paths. I fixed it with a shared `photo_url()` helper so every page builds the path the same way.
 
@@ -269,7 +267,6 @@ erDiagram
 
 ## Conclusion
 
-<!-- TODO: put this in your own words -->
 What's Left taught me how much a relational database can do on its own: views, constraints and prepared statements replaced a lot of PHP code I would otherwise have written. The hardest part was making the "permanent" rules really permanent, because every action had to be checked on the server. Next, I'd add an admin moderation role, a smarter Discover algorithm and automated tests.
 
 ## Security Notes
@@ -311,6 +308,6 @@ Distributed under the MIT License.
 
 ## Contact
 
-- **Shaun Linde**: [shaunlinde1000@gmail.com](mailto:251208@gmail.com) · [GitHub](https://github.com/Slinde06)
+- **Shaun Linde**: [251208@virtualwindow.co.za](mailto:251208@virtualwindow.co.za) · [GitHub](https://github.com/Slinde06)
 - **Project Link**: <https://github.com/Slinde06/whatsleft>
 
