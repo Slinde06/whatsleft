@@ -302,10 +302,6 @@ whats-left/
 └── index.php                  # Redirects to home/login
 ```
 
-## License
-
-Distributed under the MIT License.
-
 ## Contact
 
 - **Shaun Linde**: [251208@virtualwindow.co.za](mailto:251208@virtualwindow.co.za) · [GitHub](https://github.com/Slinde06)
